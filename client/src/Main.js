@@ -1,6 +1,6 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import GoogleMaps from './GoogleMaps';
+import GoogleMaps from './views/GoogleMaps';
 
 const Main = () => (
   <main>

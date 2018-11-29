@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { sendYelpAddress, receiveYelpResult } from './api/yelp.js';
-import { sendRoute, receiveRoute } from './api/googleMaps.js';
+import { sendYelpAddress, receiveYelpResult } from '../api/yelp.js';
+import { sendRoute, receiveRoute } from '../api/googleMaps.js';
 
 class Form extends Component {
   constructor(props) {

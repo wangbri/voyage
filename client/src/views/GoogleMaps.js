@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Forms from './Forms';
-import { codeAddress, calculateAndDisplayRoute } from './api/googleMaps.js';
-import ScrollMarkers from './Marker';
+import { codeAddress, calculateAndDisplayRoute } from '../api/googleMaps.js';
+import Forms from '../components/Forms';
+import ScrollMarkers from '../components/Marker';
 
 class GoogleMaps extends Component {
   constructor(props) {
