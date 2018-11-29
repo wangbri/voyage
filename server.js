@@ -54,7 +54,9 @@ io.on('connection', function(socket) {
 		});
 	})
 
-	// socket.on('addMarker', function(data) {
-	// 	socket.emit('sendMarker', )
-	// })
+	socket.on('route', function(data) {
+		io.emit('route', data);
+	})
 })
+
+io.listen(8000);

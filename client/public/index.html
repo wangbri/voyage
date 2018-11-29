@@ -11,7 +11,7 @@
     <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
-      #map {
+      #react {
         height: 100%;
       }
 
@@ -37,9 +37,11 @@
   </head>
 
   <body>
-    <div id="map"></div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLG4cmhAVyeZ8ni6geScmGt3azChgMwR0"></script>
+    <!-- <div id="map"></div> -->
+    <div id="react"></div>
 
-    <div id="submitAddress">
+<!--     <div id="submitAddress">
       <form class="form-inline">
         <div class="form-group mx-sm-3 mb-2">
           <input class="form-control" id="inputAddress0" placeholder="Specify an address.." value = "austin capital">
@@ -52,39 +54,38 @@
         </div>
         <button type="button" class="btn btn-primary mb-2" id="yelp-btn">Submit Yelp Address</button>
       </form>
-    </div>
+    </div> -->
+    <!-- <div id="form"></div> -->
 
     <!-- <div id="scroll"></div> -->
-    <div id="scroll" style="height: 200px";></div>
-
-    <div id="data" title="Placeholder"></div>
+    <!-- <div id="scroll" style="height: 200px";></div> -->
 
     <script src="/socket.io/socket.io.js"></script>
     <script> 
-      var map;
-      var geocoder;
-      var directionsService;
-      var directionsDisplay;
+      // var map;
+      // var geocoder;
+      // var directionsService;
+      // var directionsDisplay;
 
       var markers = [];
       var addresses = [];
 
-      var socket = io();
-      var yelpButton = document.getElementById('yelp-btn');
-      var addressButton = document.getElementById('address-btn');
+      // var socket = io();
+      // var yelpButton = document.getElementById('yelp-btn');
+      // var addressButton = document.getElementById('address-btn');
 
-      yelpButton.addEventListener('click', function() {
-        socket.emit('yelp', document.getElementById('inputYelpAddress').value);
-      });
+      // yelpButton.addEventListener('click', function() {
+      //   socket.emit('yelp', document.getElementById('inputYelpAddress').value);
+      // });
 
-      addressButton.addEventListener('click', function() {
-        populateAddresses();
-        calculateAndDisplayRoute(directionsService, directionsDisplay);
-      });
+      // addressButton.addEventListener('click', function() {
+      //   populateAddresses();
+      //   calculateAndDisplayRoute(directionsService, directionsDisplay);
+      // });
 
-      socket.on('yelp', function(data) {
-        codeAddress(data);
-      });
+      // socket.on('yelp', function(data) {
+      //   codeAddress(data);
+      // });
 
       // var map;
       // var geocoder;
@@ -94,64 +95,65 @@
       // var markers = [];
       // var addresses = [];
 
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 10
-        });
+      // function initMap() {
+      //   // map = new google.maps.Map(document.getElementById('map'), {
+      //   //   center: {lat: -34.397, lng: 150.644},
+      //   //   zoom: 10
+      //   // });
 
-        geocoder = new google.maps.Geocoder();
-        directionsService = new google.maps.DirectionsService();
-        directionsDisplay = new google.maps.DirectionsRenderer();
-        directionsDisplay.setMap(map);
-      }
+      //   geocoder = new google.maps.Geocoder();
+      //   directionsService = new google.maps.DirectionsService();
+      //   directionsDisplay = new google.maps.DirectionsRenderer();
+      //   directionsDisplay.setMap(map);
+      // }
 
       // populate array with user input locations
-      function populateAddresses() {
-        addresses = []; // clear waypoints
+      // function populateAddresses() {
+      //   addresses = []; // clear waypoints
 
-        for (var i = 0; i < 3; i++) {
-          var value = document.getElementById('inputAddress' + i).value;
-          if (value != null && value != "") {
-            addresses.push(value);
-            console.log(addresses[i]);
-          }
-        }
-      }
+      //   for (var i = 0; i < 3; i++) {
+      //     var value = document.getElementById('inputAddress' + i).value;
+      //     if (value != null && value != "") {
+      //       addresses.push(value);
+      //       console.log(addresses[i]);
+      //       socket.emit('yelp', value);
+      //     }
+      //   }
+      // }
 
-      // draw the different directions  
-      function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-        var startAddress = addresses[0];
-        var endAddress = addresses[addresses.length - 1];
-        var waypts = [];
+      // // draw the different directions  
+      // function calculateAndDisplayRoute() {
+      //   var startAddress = addresses[0];
+      //   var endAddress = addresses[addresses.length - 1];
+      //   var waypts = [];
 
-        // use waypoints for intermediate destinations
-        for (var i = 1; i < addresses.length - 1; i++) {
-          waypts.push({
-            location: addresses[i],
-            stopover: true
-          });
-        }
+      //   // use waypoints for intermediate destinations
+      //   for (var i = 1; i < addresses.length - 1; i++) {
+      //     waypts.push({
+      //       location: addresses[i],
+      //       stopover: true
+      //     });
+      //   }
 
-        var directionsParams = {
-          origin: startAddress,
-          destination: endAddress,
-          travelMode: 'DRIVING'
-        }
+      //   var directionsParams = {
+      //     origin: startAddress,
+      //     destination: endAddress,
+      //     travelMode: 'DRIVING'
+      //   }
 
-        if (waypts.length > 0) {
-          directionsParams['waypoints'] = waypts;
-          directionsParams['optimizeWaypoints'] = true;
-        }
+      //   if (waypts.length > 0) {
+      //     directionsParams['waypoints'] = waypts;
+      //     directionsParams['optimizeWaypoints'] = true;
+      //   }
 
-        directionsService.route(directionsParams, function(response, status) {
-          if (status === 'OK') {
-            directionsDisplay.setDirections(response);
-          } else {
-            alert('Directions request failed due to the following reason: ' + status);
-          }
-        });
-      }
+      //   directionsService.route(directionsParams, function(response, status) {
+      //     if (status === 'OK') {
+      //       directionsDisplay.setDirections(response);
+      //     } else {
+      //       alert('Directions request failed due to the following reason: ' + status);
+      //     }
+      //   });
+      // }
 
       // sets the map on all markers in the array.
       function setMapOnAll(map) {
@@ -172,62 +174,54 @@
         setMapOnAll(map);
       }
 
-      // uses geoencoding api to generate markers
-      function codeAddress(input) {
-        var name;
-        var address;
-        var image;
-        var link;
+      // // uses geoencoding api to generate markers
+      // function codeAddress(input) {
+      //   var name;
+      //   var address;
+      //   var image;
+      //   var link;
 
-        if (input != null) {
-          name = input['name'];
-          address = input['location'];
-          image = input['image'];
-          link = input['link'];
-        }
+      //   if (input != null) {
+      //     name = input['name'];
+      //     address = input['location'];
+      //     image = input['image'];
+      //     link = input['link'];
+      //   }
 
-        geocoder.geocode({'address': address}, function(results, status) {
-          if (status == 'OK') {
-            map.setCenter(results[0].geometry.location);
+      //   geocoder.geocode({'address': address}, function(results, status) {
+      //     if (status == 'OK') {
+      //       map.setCenter(results[0].geometry.location);
 
-            if (input != null) {
-              map.setZoom(16);
-            }
+      //       if (input != null) {
+      //         map.setZoom(16);
+      //       }
 
-            var marker = new google.maps.Marker({
-              map: map,
-              position: results[0].geometry.location,
-              title: results[0].formatted_address
-            });
+      //       var marker = new google.maps.Marker({
+      //         map: map,
+      //         position: results[0].geometry.location,
+      //         title: results[0].formatted_address
+      //       });
 
-            if (name == null) {
-              name = results[0].formatted_address;
-            }
+      //       if (name == null) {
+      //         name = results[0].formatted_address;
+      //       }
 
-            // populate react Markers
-            var data = document.getElementById("data");
-            data.setAttribute("title", name);
-            console.log(data.title);
-
-            var infowindow = new google.maps.InfoWindow({
-              content: '<div class="card" style="width: 18rem;"><img class="card-img-top" style="width: 18rem;" src=' + image + '><div class="card-body"><h5 class="card-title">' + name + '</h5><p class="card-text">Some quick example text to build on the card title and make up the bulk of the card content.</p><a href=' + link + ' class="btn btn-primary">Yelp it</a>&nbsp;<button class="btn btn-danger" onclick="removeMarker(\'' + marker['position'] + '\')">Remove</button></div></div>',
+      //       var infowindow = new google.maps.InfoWindow({
+      //         content: '<div class="card" style="width: 18rem;"><img class="card-img-top" style="width: 18rem;" src=' + image + '><div class="card-body"><h5 class="card-title">' + name + '</h5><p class="card-text">Some quick example text to build on the card title and make up the bulk of the card content.</p><a href=' + link + ' class="btn btn-primary">Yelp it</a>&nbsp;<button class="btn btn-danger" onclick="removeMarker(\'' + marker['position'] + '\')">Remove</button></div></div>',
               
-              maxWidth: 230
-            });
+      //         maxWidth: 230
+      //       });
 
-            marker.addListener('click', function() {
-              infowindow.open(map, marker);
-            });
-          } else {
-            alert('Geocode was not successful for the following reason: ' + status);
-          }
+      //       marker.addListener('click', function() {
+      //         infowindow.open(map, marker);
+      //       });
+      //     } else {
+      //       alert('Geocode was not successful for the following reason: ' + status);
+      //     }
 
-          markers.push(marker);
-        });
-      }
+      //     markers.push(marker);
+      //   });
+      // }
     </script>
   </body>
-
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLG4cmhAVyeZ8ni6geScmGt3azChgMwR0&callback=initMap"
-  async defer></script>
 </html>
