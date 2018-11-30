@@ -44,10 +44,10 @@ class Form extends Component {
   }
 
   handleAddressSubmit(event) {
-    for (var i = 0; i < 3; i++) {
-      console.log(this.state.addresses[i]);
-      sendYelpAddress(this.state.addresses[i]);
-    }
+    // for (var i = 0; i < 3; i++) {
+    //   console.log(this.state.addresses[i]);
+    //   sendYelpAddress(this.state.addresses[i]);
+    // }
 
     sendRoute(this.state.addresses);
   }
