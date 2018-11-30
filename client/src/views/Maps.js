@@ -3,7 +3,7 @@ import { codeAddress, calculateAndDisplayRoute } from '../api/googleMaps.js';
 import Forms from '../components/Forms';
 import ScrollMarkers from '../components/Marker';
 
-class GoogleMaps extends Component {
+class Maps extends Component {
   constructor(props) {
     super(props);
 
@@ -65,7 +65,7 @@ class GoogleMaps extends Component {
       <div>
         <div id="map" style={{height: 550}}></div>
         <Forms addMarker={this.addMarker} displayRoute={this.displayRoute}/>
-        <div id="scroll" style={{height: 200}}>
+        <div id="scroll" style={{height: 300}}>
           <ScrollMarkers />
         </div>
       </div>
@@ -73,4 +73,4 @@ class GoogleMaps extends Component {
   }
 }
 
-export default GoogleMaps;
+export default Maps;
