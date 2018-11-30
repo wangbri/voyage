@@ -60,6 +60,10 @@ class GoogleMaps extends Component {
     calculateAndDisplayRoute(input, this.state.directionsService, this.state.directionsDisplay);
   }
 
+  populateMarker(marker){
+    
+  }
+
   render() {
     return (
       <div>

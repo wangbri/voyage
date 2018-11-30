@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { sendYelpAddress, receiveYelpResult } from '../api/yelp.js';
-import { sendRoute, receiveRoute } from '../api/googleMaps.js';
+import { sendRoute, receiveRoute, createSchedule } from '../api/googleMaps.js';
+
 
 class Form extends Component {
   constructor(props) {
@@ -52,6 +53,10 @@ class Form extends Component {
     sendRoute(this.state.addresses);
   }
 
+  handleGenerateScheduleSubmit(event){
+    createSchedule();
+  }
+
   render() {
     return (
       <div id="submitAddress">
@@ -67,6 +72,7 @@ class Form extends Component {
             <input className="form-control" id="inputYelpAddress" placeholder="Specify a Yelp address.." value={this.state.value} onChange={this.handleYelpChange}></input>
           </div>
           <button type="button" className="btn btn-primary mb-2" id="yelp-btn" onClick={this.handleYelpSubmit}>Submit Yelp Address</button>
+          <button type="button" className="btn btn-primary mb-2" id="generate-schedule-btn" onClick={this.handleGenerateScheduleSubmit}>Generate Schedule</button>
         </form>
       </div>
     );

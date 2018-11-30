@@ -1,12 +1,30 @@
 import openSocket from 'socket.io-client';
 const  socket = openSocket('http://localhost:8000');
 
+var locationsMarkers = []; //keep track of each of the markers from user
+
 export function sendRoute(input) {
   socket.emit('route', input);
 }
 
 export function receiveRoute(cb) {
   socket.on('route', data => cb(null, data));
+}
+
+var schedules = [];
+export function createSchedule(){
+  // for (var i = 0; i < locationsMarkers.length; i++) {
+  //   console.log()
+  //   //for(var j = 0; j < locationsMarkers.length; j++){
+  //     //schdules.push(new Schedule(addresses[i], addresses[j]))
+  //   //}
+  // }
+  for(var startKey in locationsMarkers){
+    console.log(startKey, locationsMarkers[startKey]);
+    // for(var endKey in locationsMarkers){
+    //   schedules.push(new Schedule())
+    // }
+  }
 }
 
 // draw the different directions  
@@ -70,6 +88,12 @@ export function codeAddress(input, geocoder, map) {
         position: results[0].geometry.location,
         title: results[0].formatted_address
       });
+
+      locationsMarkers.push({
+        key: name,
+        value: marker
+      });
+
 
       if (name == null) {
         name = results[0].formatted_address;
