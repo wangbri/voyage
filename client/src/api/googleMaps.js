@@ -1,5 +1,6 @@
 import openSocket from 'socket.io-client';
-const  socket = openSocket('http://localhost:8000');
+import Schedule from '../classes/Schedule';
+const socket = openSocket('http://localhost:8000');
 
 var locationsMarkers = []; // keep track of each of the markers from user
 // var event = new Event('build');
@@ -16,21 +17,51 @@ export function receiveRoute(cb) {
   socket.on('route', data => cb(null, data));
 }
 
-var schedules = [];
-export function createSchedule(){
-  // for (var i = 0; i < locationsMarkers.length; i++) {
-  //   console.log()
-  //   //for(var j = 0; j < locationsMarkers.length; j++){
-  //     //schdules.push(new Schedule(addresses[i], addresses[j]))
-  //   //}
-  // }
-  for(var startKey in locationsMarkers){
-    console.log(startKey, locationsMarkers[startKey]);
-    // for(var endKey in locationsMarkers){
-    //   schedules.push(new Schedule())
-    // }
-  }
+var schedules = []; //the different list 
+var times = [];
+
+function findShortestSchedule(){
+  return new Promise(function(resolve) {
+    for(var i = 0; i < schedules.length; i++){
+      //schedules[i].calculateTime()
+      getScheduleTime(schedules[i]);
+    }
+  });   
 }
+
+function getScheduleTime(schedule) {
+  schedule.calculateTime().then(function(data) {
+  });
+}
+
+export function createSchedule(){
+  for(var startKey in locationsMarkers){
+    //console.log(startKey, locationsMarkers[startKey]);
+    //console.log(locationsMarkers[startKey].key);
+    for(var endKey in locationsMarkers){
+      if(locationsMarkers[startKey].key != locationsMarkers[endKey].key){
+        var currentSched = new Schedule(locationsMarkers[startKey].key, locationsMarkers[endKey].key);
+        
+
+        var addresses  = [];
+        for (var middleKey in locationsMarkers){
+          if((locationsMarkers[middleKey].key != locationsMarkers[startKey].key) && (locationsMarkers[middleKey].key != locationsMarkers[endKey].key)){
+            addresses.push(locationsMarkers[middleKey].key);
+          }
+        }
+      currentSched.addPlace(addresses);
+      schedules.push(currentSched); // create schedule 
+
+      }
+    }
+   }
+
+
+  findShortestSchedule().then(function() {
+    console.log(times);
+  });
+}
+
 
 // draw the different directions  
 export function calculateAndDisplayRoute(addresses, directionsService, directionsDisplay) {
