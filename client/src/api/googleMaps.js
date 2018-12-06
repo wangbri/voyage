@@ -1,7 +1,12 @@
 import openSocket from 'socket.io-client';
 const  socket = openSocket('http://localhost:8000');
 
-var locationsMarkers = []; //keep track of each of the markers from user
+var locationsMarkers = []; // keep track of each of the markers from user
+// var event = new Event('build');
+
+// locationsMarkers.addEventListener('build', function(e) {
+
+// });
 
 export function sendRoute(input) {
   socket.emit('route', input);
@@ -118,3 +123,5 @@ export function codeAddress(input, geocoder, map) {
     // markers.push(marker);
   });
 }
+
+export { locationsMarkers };

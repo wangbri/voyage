@@ -11,7 +11,8 @@ class Maps extends Component {
       map: null,
       geocoder: null,
       directionsService: null,
-      directionsDisplay: null
+      directionsDisplay: null,
+      markers: []
     }
 
     this.addMarker = this.addMarker.bind(this);
@@ -41,27 +42,28 @@ class Maps extends Component {
   }
 
   componentWillMount() {
-    var geocoder = new window.google.maps.Geocoder();
-    var directionsService = new window.google.maps.DirectionsService();
-    var directionsDisplay = new window.google.maps.DirectionsRenderer();
+    // var geocoder = new window.google.maps.Geocoder();
+    // var directionsService = new window.google.maps.DirectionsService();
+    // var directionsDisplay = new window.google.maps.DirectionsRenderer();
 
-    this.setState({
-      geocoder: geocoder,
-      directionsService: directionsService,
-      directionsDisplay: directionsDisplay
-    });
+    // this.setState({
+    //   geocoder: geocoder,
+    //   directionsService: directionsService,
+    //   directionsDisplay: directionsDisplay
+    // });
   }
 
   addMarker(input) {
     codeAddress(input, this.state.geocoder, this.state.map);
+    var markers = this.state.markers;
+    markers.push(input.title);
+    this.setState({
+      markers: markers
+    });
   }
 
   displayRoute(input) {
     calculateAndDisplayRoute(input, this.state.directionsService, this.state.directionsDisplay);
-  }
-
-  populateMarker(marker){
-    
   }
 
   render() {
@@ -70,7 +72,7 @@ class Maps extends Component {
         <div id="map" style={{height: 550}}></div>
         <Forms addMarker={this.addMarker} displayRoute={this.displayRoute}/>
         <div id="scroll" style={{height: 300}}>
-          <ScrollMarkers />
+          <ScrollMarkers markers={this.state.markers}/>
         </div>
       </div>
     );

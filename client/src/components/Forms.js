@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { sendYelpAddress, receiveYelpResult } from '../api/yelp.js';
 import { sendRoute, receiveRoute, createSchedule } from '../api/googleMaps.js';
 
-
 class Form extends Component {
   constructor(props) {
     super(props);
@@ -60,21 +59,12 @@ class Form extends Component {
 
   render() {
     return (
-      <div id="submitAddress">
-        <form className="form-inline">
-          <div className="form-group mx-sm-3 mb-2">
-            <input className="form-control" id="inputAddress0" placeholder="Specify an address.." value={this.state.addresses[0]} onChange={this.handleAddressChange}></input>
-            <input className="form-control" id="inputAddress1" placeholder="Specify an address.." value={this.state.addresses[1]} onChange={this.handleAddressChange}></input>
-            <input className="form-control" id="inputAddress2" placeholder="Specify an address.." value={this.state.addresses[2]} onChange={this.handleAddressChange}></input>
-          </div>
-          <button type="button" className="btn btn-primary mb-2" onClick={this.handleAddressSubmit}>Submit Address</button>
-
-          <div className="form-group mx-sm-3 mb-2">
-            <input className="form-control" id="inputYelpAddress" placeholder="Specify a Yelp address.." value={this.state.value} onChange={this.handleYelpChange}></input>
-          </div>
-          <button type="button" className="btn btn-primary mb-2" id="yelp-btn" onClick={this.handleYelpSubmit}>Submit Yelp Address</button>
-          <button type="button" className="btn btn-primary mb-2" id="generate-schedule-btn" onClick={this.handleGenerateScheduleSubmit}>Generate Schedule</button>
-        </form>
+      <div className="row" id="submitAddress">
+        <input type="text" className="form-control" id="inputYelpAddress" placeholder="Specify a Yelp address.." value={this.state.value} onChange={this.handleYelpChange}></input>
+        <div class="btn-group">
+          <button type="button" className="btn btn-primary" id="yelp-btn" onClick={this.handleYelpSubmit}>Submit Yelp Address</button>
+          <button type="button" className="btn btn-primary" id="generate-schedule-btn" onClick={this.handleGenerateScheduleSubmit}>Generate Schedule</button>
+        </div>
       </div>
     );
   }

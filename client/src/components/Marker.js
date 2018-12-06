@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import HorizontalScroll from 'react-scroll-horizontal';
 // import { Card, CardImg, CardText, CardBody,
 //   CardTitle, CardSubtitle, Button } from 'reactstrap';
-
+// import { locationsMarkers } from '../api/googleMaps.js'
 
 function Marker(props) {
 	return (
@@ -22,26 +22,27 @@ class ScrollMarkers extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			title: "Sample Text"
+			title: "Sample Text",
+			markers: []
 		}
 	}
 
-  render() {
-    const child = { width: `20em`, height: `50em`, margin: `10px`}
-    const parent = { width: `100%`, height: `100%`}    
-    return (
-      <div style={parent}>
-        <HorizontalScroll>
-            <div style={child}><Marker title={this.state.title}/></div>
-            <div style={child}><Marker/></div>
-            <div style={child}><Marker/></div>
-            <div style={child}><Marker/></div>
-            <div style={child}><Marker/></div>
-            <div style={child}><Marker/></div>
-        </HorizontalScroll>
-      </div>
-    );
-  }
+	render() {
+  	const child = { width: `20em`, height: `50em`, margin: `10px`}
+  	const parent = { width: `100%`, height: `100%`}    
+  	return (
+  		<div style={parent}>
+    		<HorizontalScroll>
+      		<div style={child}><Marker title={this.props.markers[0]}/></div>
+      		<div style={child}><Marker/></div>
+      		<div style={child}><Marker/></div>
+      		<div style={child}><Marker/></div>
+      		<div style={child}><Marker/></div>
+      		<div style={child}><Marker/></div>
+    		</HorizontalScroll>
+  		</div>
+  	);
+	}
 }
 
 export default ScrollMarkers;
