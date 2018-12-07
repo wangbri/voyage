@@ -1,0 +1,358 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Forms Input renders a snapshot 1`] = `
+<div
+  className="row"
+  id="submitAddress"
+>
+  <input
+    className="form-control"
+    id="inputYelpAddress"
+    onChange={[Function]}
+    placeholder="Specify a Yelp address.."
+    type="text"
+    value=""
+  />
+  <div
+    class="btn-group"
+  >
+    <button
+      className="btn btn-primary"
+      id="yelp-btn"
+      onClick={[Function]}
+      type="button"
+    >
+      Submit Yelp Address
+    </button>
+    <button
+      className="btn btn-primary"
+      id="generate-schedule-btn"
+      onClick={[Function]}
+      type="button"
+    >
+      Generate Schedule
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Location Marker renders a snapshot 1`] = `<locationsMarkers />`;
+
+exports[`Map Input renders a snapshot 1`] = `
+<div>
+  <div
+    id="map"
+    style={
+      Object {
+        "height": 550,
+      }
+    }
+  />
+  <div
+    className="row"
+    id="submitAddress"
+  >
+    <input
+      className="form-control"
+      id="inputYelpAddress"
+      onChange={[Function]}
+      placeholder="Specify a Yelp address.."
+      type="text"
+      value=""
+    />
+    <div
+      class="btn-group"
+    >
+      <button
+        className="btn btn-primary"
+        id="yelp-btn"
+        onClick={[Function]}
+        type="button"
+      >
+        Submit Yelp Address
+      </button>
+      <button
+        className="btn btn-primary"
+        id="generate-schedule-btn"
+        onClick={[Function]}
+        type="button"
+      >
+        Generate Schedule
+      </button>
+    </div>
+  </div>
+  <div
+    id="scroll"
+    style={
+      Object {
+        "height": 300,
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "height": "100%",
+          "width": "100%",
+        }
+      }
+    >
+      <div
+        className="scroll-horizontal "
+        onWheel={[Function]}
+        style={
+          Object {
+            "height": "100%",
+            "overflow": "hidden",
+            "position": "relative",
+            "width": "100%",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "display": "inline-flex",
+              "height": "100%",
+              "position": "absolute",
+              "transform": "translate3d(0px, 0,0)",
+              "willChange": "transform",
+            }
+          }
+        >
+          <div
+            style={
+              Object {
+                "height": "50em",
+                "margin": "10px",
+                "width": "20em",
+              }
+            }
+          >
+            <div
+              className="card"
+              styles="width: 18rem;"
+            >
+              <img
+                className="card-img-top"
+                src="https://placeholdit.imgix.net/~text?txtsize=16&txt=318%C3%97180&w=288&h=50"
+                styles="width: 18rem;"
+              />
+              <div
+                className="card-body"
+              >
+                <h5
+                  className="card-title"
+                />
+                <p
+                  className="card-text"
+                >
+                  Some quick example text to build on the card title and make up the bulk of the card's content.
+                </p>
+                <a
+                  className="btn btn-primary"
+                  href="#"
+                >
+                  Go somewhere
+                </a>
+              </div>
+            </div>
+          </div>
+          <div
+            style={
+              Object {
+                "height": "50em",
+                "margin": "10px",
+                "width": "20em",
+              }
+            }
+          >
+            <div
+              className="card"
+              styles="width: 18rem;"
+            >
+              <img
+                className="card-img-top"
+                src="https://placeholdit.imgix.net/~text?txtsize=16&txt=318%C3%97180&w=288&h=50"
+                styles="width: 18rem;"
+              />
+              <div
+                className="card-body"
+              >
+                <h5
+                  className="card-title"
+                />
+                <p
+                  className="card-text"
+                >
+                  Some quick example text to build on the card title and make up the bulk of the card's content.
+                </p>
+                <a
+                  className="btn btn-primary"
+                  href="#"
+                >
+                  Go somewhere
+                </a>
+              </div>
+            </div>
+          </div>
+          <div
+            style={
+              Object {
+                "height": "50em",
+                "margin": "10px",
+                "width": "20em",
+              }
+            }
+          >
+            <div
+              className="card"
+              styles="width: 18rem;"
+            >
+              <img
+                className="card-img-top"
+                src="https://placeholdit.imgix.net/~text?txtsize=16&txt=318%C3%97180&w=288&h=50"
+                styles="width: 18rem;"
+              />
+              <div
+                className="card-body"
+              >
+                <h5
+                  className="card-title"
+                />
+                <p
+                  className="card-text"
+                >
+                  Some quick example text to build on the card title and make up the bulk of the card's content.
+                </p>
+                <a
+                  className="btn btn-primary"
+                  href="#"
+                >
+                  Go somewhere
+                </a>
+              </div>
+            </div>
+          </div>
+          <div
+            style={
+              Object {
+                "height": "50em",
+                "margin": "10px",
+                "width": "20em",
+              }
+            }
+          >
+            <div
+              className="card"
+              styles="width: 18rem;"
+            >
+              <img
+                className="card-img-top"
+                src="https://placeholdit.imgix.net/~text?txtsize=16&txt=318%C3%97180&w=288&h=50"
+                styles="width: 18rem;"
+              />
+              <div
+                className="card-body"
+              >
+                <h5
+                  className="card-title"
+                />
+                <p
+                  className="card-text"
+                >
+                  Some quick example text to build on the card title and make up the bulk of the card's content.
+                </p>
+                <a
+                  className="btn btn-primary"
+                  href="#"
+                >
+                  Go somewhere
+                </a>
+              </div>
+            </div>
+          </div>
+          <div
+            style={
+              Object {
+                "height": "50em",
+                "margin": "10px",
+                "width": "20em",
+              }
+            }
+          >
+            <div
+              className="card"
+              styles="width: 18rem;"
+            >
+              <img
+                className="card-img-top"
+                src="https://placeholdit.imgix.net/~text?txtsize=16&txt=318%C3%97180&w=288&h=50"
+                styles="width: 18rem;"
+              />
+              <div
+                className="card-body"
+              >
+                <h5
+                  className="card-title"
+                />
+                <p
+                  className="card-text"
+                >
+                  Some quick example text to build on the card title and make up the bulk of the card's content.
+                </p>
+                <a
+                  className="btn btn-primary"
+                  href="#"
+                >
+                  Go somewhere
+                </a>
+              </div>
+            </div>
+          </div>
+          <div
+            style={
+              Object {
+                "height": "50em",
+                "margin": "10px",
+                "width": "20em",
+              }
+            }
+          >
+            <div
+              className="card"
+              styles="width: 18rem;"
+            >
+              <img
+                className="card-img-top"
+                src="https://placeholdit.imgix.net/~text?txtsize=16&txt=318%C3%97180&w=288&h=50"
+                styles="width: 18rem;"
+              />
+              <div
+                className="card-body"
+              >
+                <h5
+                  className="card-title"
+                />
+                <p
+                  className="card-text"
+                >
+                  Some quick example text to build on the card title and make up the bulk of the card's content.
+                </p>
+                <a
+                  className="btn btn-primary"
+                  href="#"
+                >
+                  Go somewhere
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`User Input renders a snapshot 1`] = `<div />`;
