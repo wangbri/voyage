@@ -136,7 +136,7 @@ export function codeAddress(input, geocoder, map) {
       }
 
       var infowindow = new window.google.maps.InfoWindow({
-        content: '<div class="card" style="width: 18rem;"><img class="card-img-top" style="width: 18rem;" src=' + image + 
+        content: '<div class="card" style="width: 18rem;"><img class="card-img-top" src=' + image + 
         '><div class="card-body"><h5 class="card-title">' + name + 
         '</h5><p class="card-text">Some quick example text to build on the card title and make up the bulk of the card content.</p><a href=' + link + 
         ' class="btn btn-primary">Yelp it</a>&nbsp;<button class="btn btn-danger" onclick="removeMarker(\'' + marker['position'] + 
