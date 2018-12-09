@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { sendYelpAddress, receiveYelpResult } from '../api/yelp.js';
-import { sendRoute, receiveRoute, createSchedule, receiveSchedule } from '../api/googleMaps.js';
+import { sendRoute, receiveRoute, createSchedule } from '../api/googleMaps.js';
 
 class Form extends Component {
   constructor(props) {
@@ -60,22 +60,25 @@ class Form extends Component {
   handleGenerateScheduleSubmit(event) {
     var names = [];
     for (var i = 0; i < this.props.markers.length; i++) {
-      names.push(this.props.markers[i].input.name);
+      names.push({
+        name: this.props.markers[i].input.name,
+        location: this.props.markers[i].input.location
+      });
     }
 
     createSchedule(names);
   }
 
-  // printSchedule(input) {
-  //   console.log("in print schedule");
+  printSchedule(input) {
+    console.log("in print schedule");
 
-  //   console.log(input.smallestScheduleList);
-  //   console.log(input.smallestTime);
-  //   console.log(input.secondScheduleList);
-  //   console.log(input.secondTime);
-  //   console.log(input.thirdScheduleList);
-  //   console.log(input.thirdTime);
-  // }
+    console.log(input.smallestScheduleList);
+    console.log(input.smallestTime);
+    console.log(input.secondScheduleList);
+    console.log(input.secondTime);
+    console.log(input.thirdScheduleList);
+    console.log(input.thirdTime);
+  }
 
   render() {
     return (

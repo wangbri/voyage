@@ -44,15 +44,15 @@ var Schedule = (function (){
 			  // use waypoints for intermediate destinations
 			  for (var i = 0; i < this.placesInput.length; i++) {
 			    waypts.push({
-			      location: this.placesInput[i],
+			      location: this.placesInput[i].location,
 			      stopover: true
 			    });
 			  }
 
 			  // googleMapsClient.geocode({
 			  	return googleMapsClient.directions({
-			      	origin: this.start,
-			      	destination: this.end,
+			      	origin: this.start.location,
+			      	destination: this.end.location,
 			      	mode: transportation,
 			      	waypoints: waypts,
 			      	optimize: true,
@@ -120,7 +120,7 @@ var Schedule = (function (){
 			};
 
 			placesMarker1.input = {
-				name: this.start,
+				name: this.start.name,
 				image: "https://placeholdit.imgix.net/~text?txtsize=16&txt=318%C3%97180&w=288&h=50"
 			}
 
@@ -133,7 +133,7 @@ var Schedule = (function (){
 				};
 
 				placesMarker.input = {
-					name: this.placesInput[i],
+					name: this.placesInput[i].name,
 					image: "https://placeholdit.imgix.net/~text?txtsize=16&txt=318%C3%97180&w=288&h=50"
 				}
 
@@ -146,7 +146,7 @@ var Schedule = (function (){
 			};
 
 			placesMarker2.input = {
-				name: this.end,
+				name: this.end.name,
 				image: "https://placeholdit.imgix.net/~text?txtsize=16&txt=318%C3%97180&w=288&h=50"
 			}
 
