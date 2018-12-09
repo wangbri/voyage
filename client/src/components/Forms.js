@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { sendYelpAddress, receiveYelpResult } from '../api/yelp.js';
-import { sendRoute, receiveRoute, createSchedule, receiveSchedule } from '../api/googleMaps.js';
+import { sendRoute, receiveRoute, createSchedule } from '../api/googleMaps.js';
 
 class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
       value: "",
-      addresses: []
+      addresses: [],
+      markers: []
       // map: null,
       // geocoder: null
     }
@@ -17,7 +18,8 @@ class Form extends Component {
     this.handleYelpChange = this.handleYelpChange.bind(this);
     this.handleAddressSubmit = this.handleAddressSubmit.bind(this);
     this.handleAddressChange = this.handleAddressChange.bind(this);
-    this.printSchedule = this.printSchedule.bind(this);
+    this.handleGenerateScheduleSubmit = this.handleGenerateScheduleSubmit.bind(this);
+    // this.printSchedule = this.printSchedule.bind(this);
 
     receiveYelpResult((err, data) => this.props.displayMarkers(data));
     receiveRoute((err, data) => this.props.displayRoute(data));
@@ -55,11 +57,19 @@ class Form extends Component {
     sendRoute(this.state.addresses);
   }
 
-  handleGenerateScheduleSubmit(event){
-    createSchedule();
+  handleGenerateScheduleSubmit(event) {
+    var names = [];
+    for (var i = 0; i < this.props.markers.length; i++) {
+      names.push({
+        name: this.props.markers[i].input.name,
+        location: this.props.markers[i].input.location
+      });
+    }
+
+    createSchedule(names);
   }
 
-  printSchedule(input){
+  printSchedule(input) {
     console.log("in print schedule");
 
     console.log(input.smallestScheduleList);

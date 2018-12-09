@@ -1,8 +1,6 @@
 import openSocket from 'socket.io-client';
 const socket = openSocket('http://localhost:8000');
 
-var locationsMarkers = []; // keep track of each of the markers from user
-var locations = [];
 // var event = new Event('build');
 
 // locationsMarkers.addEventListener('build', function(e) {
@@ -17,8 +15,8 @@ export function receiveRoute(cb) {
   socket.on('route', data => cb(null, data));
 }
 
-export function createSchedule() {
-  socket.emit('schedule', locations);
+export function createSchedule(data) {
+  socket.emit('schedule', data);
 }
 
 export function receiveSchedule(cb) {
@@ -31,6 +29,14 @@ export function receiveRemove(cb) {
 
 export function receiveAdd(cb) {
   socket.on('add', data => cb(null, data));
+}
+
+export function receiveSmallest(cb) {
+  socket.on('smallest', data => cb(null,data));
+}
+
+export function getSmallest(data) {
+  socket.emit('smallest', data);
 }
 
 
@@ -98,13 +104,6 @@ export function codeAddress(input, geocoder, map) {
           icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
         });
 
-        locationsMarkers.push({
-          key: name,
-          value: marker
-        });
-
-        locations.push(name);
-
       /******************************check here**********************/
 
 
@@ -134,7 +133,8 @@ export function codeAddress(input, geocoder, map) {
         tempMarker.input = {
           name: input['name'],
           image: input['image'],
-          link: input['link']
+          link: input['link'],
+          location: input['location']
         }
 
         resolve(tempMarker);
@@ -147,5 +147,3 @@ export function codeAddress(input, geocoder, map) {
     });
   });
 }
-
-export { locationsMarkers };

@@ -32,8 +32,9 @@ export function createSchedule(){
             addresses.push(locationsMarkers[middleKey].key);
           }
         }
-      currentSched.addPlace(addresses);
-      schedules.push(currentSched); // create schedule 
+        
+        currentSched.addPlace(addresses);
+        schedules.push(currentSched); // create schedule 
 
       }
     }

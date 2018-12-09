@@ -99,8 +99,9 @@ class Maps extends Component {
 
       for (var i = 0; i < results.length; i++) {
         var tempMarker = results[i];
-        console.log("in results: " + tempMarker['marker'].position);
-        console.log("in results: " + tempMarker['input'].name);
+        console.log("in displayMarkers: " + tempMarker['marker'].position);
+        console.log("in displayMarkers: " + tempMarker['input'].name);
+        console.log("in displayMarkers: " + tempMarker['input'].location);
 
         var infoWindow = new window.google.maps.InfoWindow({
           content: '<div class="card" style="width: 18rem;"><img class="card-img-top" src=' + tempMarker['input'].image + 
@@ -147,7 +148,8 @@ class Maps extends Component {
         newMarker.input = {
           name: tempMarker.input.name,
           image: tempMarker.input.image,
-          link: tempMarker.input.link
+          link: tempMarker.input.link,
+          location: tempMarker.input.location
         }
 
         var infoWindow = new window.google.maps.InfoWindow({
@@ -191,7 +193,7 @@ class Maps extends Component {
     return (
       <div>
         <div id="map" style={{height: 550}}></div>
-        <Forms displayMarkers={this.displayMarkers} displayRoute={this.displayRoute}/>
+        <Forms ref={instance => {this.Forms = instance;}} displayMarkers={this.displayMarkers} displayRoute={this.displayRoute} markers={this.state.markers}/>
         <div id="scroll" style={{height: 300}}>
           <ScrollMarkers ref={instance => {this.ScrollMarkers = instance;}} markers={this.state.markers}/>
         </div>

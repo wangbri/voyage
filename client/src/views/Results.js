@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import ScrollMarkers from '../components/Marker';
-import { receiveSchedule } from '../api/googleMaps.js';
+import { getSmallest, receiveSmallest } from '../api/googleMaps.js';
 
 class Results extends Component {
   constructor(props) {
@@ -11,10 +11,14 @@ class Results extends Component {
     }
 
     this.printSchedule = this.printSchedule.bind(this);
-    receiveSchedule((err, data) => this.printSchedule(data));
+    receiveSmallest((err, data) => this.printSchedule(data));
   }
 
-  printSchedule(input){
+  componentDidMount() {
+    getSmallest("");
+  }
+
+  printSchedule(input) {
     console.log("in print schedule");
 
     this.setState({
