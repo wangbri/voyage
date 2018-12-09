@@ -8,7 +8,8 @@ class Form extends Component {
     super(props);
     this.state = {
       value: "",
-      addresses: []
+      addresses: [],
+      markers: []
       // map: null,
       // geocoder: null
     }
@@ -56,7 +57,7 @@ class Form extends Component {
   }
 
   handleGenerateScheduleSubmit(event){
-    createSchedule();
+    createSchedule(this.props.markers);
   }
 
   printSchedule(input){

@@ -55,8 +55,13 @@ io.on('connection', function(socket) {
 			price: priceString
 		}).then(response => {
 			var data = [];
+			var length = 5;
 
-			for (var i = 0; i < 5; i++) {
+			if (response.jsonBody.businesses.length < 5) {
+				length = response.jsonBody.businesses.length;
+			}
+
+			for (var i = 0; i < length; i++) {
 				var business = response.jsonBody.businesses[i];
 
 				var name = business.name;	

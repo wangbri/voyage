@@ -191,7 +191,7 @@ class Maps extends Component {
     return (
       <div>
         <div id="map" style={{height: 550}}></div>
-        <Forms displayMarkers={this.displayMarkers} displayRoute={this.displayRoute}/>
+        <Forms ref={instance => {this.Forms = instance;}} displayMarkers={this.displayMarkers} displayRoute={this.displayRoute} markers={this.state.markers}/>
         <div id="scroll" style={{height: 300}}>
           <ScrollMarkers ref={instance => {this.ScrollMarkers = instance;}} markers={this.state.markers}/>
         </div>

@@ -1,8 +1,6 @@
 import openSocket from 'socket.io-client';
 const socket = openSocket('http://localhost:8000');
 
-var locationsMarkers = []; // keep track of each of the markers from user
-var locations = [];
 // var event = new Event('build');
 
 // locationsMarkers.addEventListener('build', function(e) {
@@ -17,8 +15,8 @@ export function receiveRoute(cb) {
   socket.on('route', data => cb(null, data));
 }
 
-export function createSchedule() {
-  socket.emit('schedule', locations);
+export function createSchedule(data) {
+  socket.emit('schedule', data);
 }
 
 export function receiveSchedule(cb) {
@@ -98,13 +96,6 @@ export function codeAddress(input, geocoder, map) {
           icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
         });
 
-        locationsMarkers.push({
-          key: name,
-          value: marker
-        });
-
-        locations.push(name);
-
       /******************************check here**********************/
 
 
@@ -147,5 +138,3 @@ export function codeAddress(input, geocoder, map) {
     });
   });
 }
-
-export { locationsMarkers };

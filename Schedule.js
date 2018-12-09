@@ -68,8 +68,8 @@ var Schedule = (function (){
 					//resolve(this.time);
 				 }) //function(err){
 		    	.catch((err) => {
-				    //alert('Directions request failed due to the following reason: ' + status);
-				    console.log("Problem with directions server");
+				    // alert('Directions request failed due to the following reason: ' + status);
+				    console.log("Problem with directions server " + err);
 				});
 			  //})
 
