@@ -204,8 +204,8 @@ io.on('connection', function(socket) {
     		}
 
     		console.log("emitting schedule");
-    		console.log(smallest);
-    		io.emit('schedule', smallest);
+    		console.log(smallest.smallestScheduleList);
+    		io.emit('schedule', "");
     	})
     	.catch(e => {
     		console.log(e);

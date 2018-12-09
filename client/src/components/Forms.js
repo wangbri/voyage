@@ -18,7 +18,8 @@ class Form extends Component {
     this.handleYelpChange = this.handleYelpChange.bind(this);
     this.handleAddressSubmit = this.handleAddressSubmit.bind(this);
     this.handleAddressChange = this.handleAddressChange.bind(this);
-    this.printSchedule = this.printSchedule.bind(this);
+    this.handleGenerateScheduleSubmit = this.handleGenerateScheduleSubmit.bind(this);
+    // this.printSchedule = this.printSchedule.bind(this);
 
     receiveYelpResult((err, data) => this.props.displayMarkers(data));
     receiveRoute((err, data) => this.props.displayRoute(data));
@@ -56,20 +57,25 @@ class Form extends Component {
     sendRoute(this.state.addresses);
   }
 
-  handleGenerateScheduleSubmit(event){
-    createSchedule(this.props.markers);
+  handleGenerateScheduleSubmit(event) {
+    var names = [];
+    for (var i = 0; i < this.props.markers.length; i++) {
+      names.push(this.props.markers[i].input.name);
+    }
+
+    createSchedule(names);
   }
 
-  printSchedule(input){
-    console.log("in print schedule");
+  // printSchedule(input) {
+  //   console.log("in print schedule");
 
-    console.log(input.smallestScheduleList);
-    console.log(input.smallestTime);
-    console.log(input.secondScheduleList);
-    console.log(input.secondTime);
-    console.log(input.thirdScheduleList);
-    console.log(input.thirdTime);
-  }
+  //   console.log(input.smallestScheduleList);
+  //   console.log(input.smallestTime);
+  //   console.log(input.secondScheduleList);
+  //   console.log(input.secondTime);
+  //   console.log(input.thirdScheduleList);
+  //   console.log(input.thirdTime);
+  // }
 
   render() {
     return (

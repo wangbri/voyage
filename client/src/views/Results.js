@@ -14,36 +14,36 @@ class Results extends Component {
     receiveSchedule((err, data) => this.printSchedule(data));
   }
 
-  printSchedule(input){
+  printSchedule(input) {
     console.log("in print schedule");
 
-    this.setState({
-      markers: [input.smallestScheduleList, input.secondScheduleList, input.thirdScheduleList]
-    });
+    // this.setState({
+    //   markers: [input.smallestScheduleList, input.secondScheduleList, input.thirdScheduleList]
+    // });
 
-    console.log(input.smallestScheduleList);
-    console.log(input.smallestTime);
-    console.log(input.secondScheduleList);
-    console.log(input.secondTime);
-    console.log(input.thirdScheduleList);
-    console.log(input.thirdTime);
+    // console.log(input.smallestScheduleList);
+    // console.log(input.smallestTime);
+    // console.log(input.secondScheduleList);
+    // console.log(input.secondTime);
+    // console.log(input.thirdScheduleList);
+    // console.log(input.thirdTime);
   }
 
-  renderSchedule(markers) {
-    return (
-      <div style={{height: 300}}>
-        <ScrollMarkers ref={instance => {this.ScrollMarkers = instance;}} markers={markers}/>
-      </div>
-    );
-  }
+  // renderSchedule(markers) {
+  //   return (
+  //     <div style={{height: 300}}>
+  //       <ScrollMarkers ref={instance => {this.ScrollMarkers = instance;}} markers={markers}/>
+  //     </div>
+  //   );
+  // }
 
   render() {
     return (
       <div>
       { 
-        this.state.markers.map(marker => {
-          return this.renderSchedule(marker);
-        })
+        // this.state.markers.map(marker => {
+        //   return this.renderSchedule(marker);
+        // })
       }
       </div>
     );

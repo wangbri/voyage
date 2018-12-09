@@ -151,6 +151,7 @@ var Schedule = (function (){
 			}
 
 			places.push(placesMarker2);
+			console.log(places);
 			
 			return places;
 		}
