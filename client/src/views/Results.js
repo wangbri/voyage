@@ -11,7 +11,7 @@ class Results extends Component {
     }
 
     this.printSchedule = this.printSchedule.bind(this);
-    receiveSchedule((err, data) => this.printSchedule(data));
+    //receiveSchedule((err, data) => this.printSchedule(data));
   }
 
   printSchedule(input) {

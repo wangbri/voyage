@@ -85,6 +85,13 @@ class Form extends Component {
           <button type="button" className="btn btn-primary" id="yelp-btn" onClick={this.handleYelpSubmit}>Submit Yelp Address</button>
           <a type="button" className="btn btn-primary" id="generate-schedule-btn" onClick={this.handleGenerateScheduleSubmit}>Generate Schedule</a>
         </div>
+        <div class="col">
+            <select id="inputState" className="form-control" onChange={this.props.handleScheduleChange}>
+              <option selected>smallest</option>
+              <option>second smallest</option>
+              <option>third smallest</option>
+            </select>
+          </div>
       </div>
     );
   }
