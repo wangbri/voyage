@@ -54,23 +54,27 @@ io.on('connection', function(socket) {
 			location: location,
 			price: priceString
 		}).then(response => {
-			var business = response.jsonBody.businesses[0];
+			var data = [];
 
-			var name = business.name;	
-			var location = business.location.address1;
-			var image = business.image_url;
-			var link = business.url;
+			for (var i = 0; i < 5; i++) {
+				var business = response.jsonBody.businesses[i];
 
-			var data = {
-				name: name,
-				location: location,
-				image: image,
-				link: link
+				var name = business.name;	
+				var location = business.location.address1;
+				var image = business.image_url;
+				var link = business.url;
+
+				var point = {
+					name: name,
+					location: location,
+					image: image,
+					link: link
+				}
+
+				console.log(name);
+
+				data.push(point);
 			}
-
-			console.log(location);
-			console.log(name);
-			console.log(link);
 
 			io.emit('yelp', data);
 		}).catch(e => {
@@ -92,12 +96,16 @@ io.on('connection', function(socket) {
 		io.emit('remove', data);
 	})
 
+	socket.on('add', function(data) {
+		io.emit('add', data);
+	})
+
 	socket.on('route', function(data) {
 		io.emit('route', data);
 	})
 
 	socket.on('schedule', function(data){
-		console.log(data);
+		console.log("in schedule: " + data);
 
 		var schedules = []; //the different list 
 

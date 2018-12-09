@@ -29,6 +29,10 @@ export function receiveRemove(cb) {
   socket.on('remove', data => cb(null, data));
 }
 
+export function receiveAdd(cb) {
+  socket.on('add', data => cb(null, data));
+}
+
 
 // draw the different directions  
 export function calculateAndDisplayRoute(addresses, directionsService, directionsDisplay) {
@@ -90,7 +94,8 @@ export function codeAddress(input, geocoder, map) {
         var marker = new window.google.maps.Marker({
           map: map,
           position: results[0].geometry.location,
-          title: results[0].formatted_address
+          title: results[0].formatted_address,
+          icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
         });
 
         locationsMarkers.push({
@@ -98,7 +103,7 @@ export function codeAddress(input, geocoder, map) {
           value: marker
         });
 
-      locations.push(name);
+        locations.push(name);
 
       /******************************check here**********************/
 
@@ -121,7 +126,18 @@ export function codeAddress(input, geocoder, map) {
         //   infowindow.open(map, marker);
         // });
 
-        resolve(marker);
+        var tempMarker = {
+          marker: marker,
+          input: []
+        };
+
+        tempMarker.input = {
+          name: input['name'],
+          image: input['image'],
+          link: input['link']
+        }
+
+        resolve(tempMarker);
       } else {
         alert('Geocode was not successful for the following reason: ' + status);
         reject("Geocode was not successful");

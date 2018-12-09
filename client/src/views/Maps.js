@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { receiveRemove, codeAddress, calculateAndDisplayRoute } from '../api/googleMaps.js';
+import { receiveAdd, receiveRemove, codeAddress, calculateAndDisplayRoute } from '../api/googleMaps.js';
 import Forms from '../components/Forms';
 import ScrollMarkers from '../components/Marker';
 
@@ -12,16 +12,20 @@ class Maps extends Component {
       geocoder: null,
       directionsService: null,
       directionsDisplay: null,
-      markers: []
+      markers: [],
+      tempMarkers: []
     }
 
-    this.addMarker = this.addMarker.bind(this);
+    this.displayMarkers = this.displayMarkers.bind(this);
+    // this.setMapOnAll = this.setMapOnAll.bind(this);
     this.displayRoute = this.displayRoute.bind(this);
     this.removeMarker = this.removeMarker.bind(this);
-    this.setMapOnAll = this.setMapOnAll(this);
+    this.addMarker = this.addMarker.bind(this);
 
     // receiveSchedule((err, data) => this.printSchedule(data));
+
     receiveRemove((err, data) => this.removeMarker(data));
+    receiveAdd((err, data) => this.addMarker(data));
   }
 
   componentDidMount() {
@@ -58,46 +62,110 @@ class Maps extends Component {
     // });
   }
 
-  setMapOnAll() {
-    var markers = this.state.markers;
+  // setMapOnAll() {
+  //   var markers = this.state.markers;
 
-    for (var i = 0; i < markers.length; i++) {
-      markers[i].marker.setMap(this.state.map);
-    }
+  //   for (var i = 0; i < markers.length; i++) {
+  //     markers[i].marker.setMap(this.state.map);
+  //   }
+  // }
+
+  createListener(marker, infoWindow) {
+    // WHY does it have to be an arrow function to get scope??
+    marker.addListener('click', (e) => {
+      infoWindow.open(this.state.map, marker);
+    });
   }
 
-  addMarker(input) {
-    codeAddress(input, this.state.geocoder, this.state.map)
-    .then(marker => {
-      var markers = this.state.markers;
+  displayMarkers(input) {
+    console.log(input.length);
+
+    let promises = input.map((data, index) => {
+      var tempMarker = codeAddress(data, this.state.geocoder, this.state.map);
+      console.log("displayMarkers called: " + tempMarker);
+
+      return tempMarker;
+    });
+
+    Promise.all(promises)
+    .then(results => {
       
-      markers.push({
-        marker: marker,
-        input: input
-      });
+      // clear tempMarkers after each display
+      var tempMarkers = this.state.tempMarkers;
+      for (var i = 0; i < tempMarkers.length; i++) {
+        tempMarkers[i].marker.setMap(null);
+      }
+      tempMarkers = [];
+
+      for (var i = 0; i < results.length; i++) {
+        var tempMarker = results[i];
+        console.log("in results: " + tempMarker['marker'].position);
+        console.log("in results: " + tempMarker['input'].name);
+
+        var infoWindow = new window.google.maps.InfoWindow({
+          content: '<div class="card" style="width: 18rem;"><img class="card-img-top" src=' + tempMarker['input'].image + 
+          '><div class="card-body"><h5 class="card-title">' + tempMarker['input'].name + 
+          '</h5><p class="card-text">Some quick example text to build on the card title and make up the bulk of the card content.</p><button onclick="window.open(\'' + tempMarker['input'].link + 
+          '\')" class="btn btn-primary">Yelp it</button>&nbsp;<button class="btn btn-danger" onclick="removeMarker(\'' + tempMarker['marker'].position + '\')">Remove</button>&nbsp;<button class="btn btn-success" onclick="addMarker(\'' + tempMarker['marker'].position + '\')">Add</button></div></div>',   
+          maxWidth: 230
+        });
+
+        // stupid scope stuff
+        this.createListener(tempMarker['marker'], infoWindow);
+        tempMarkers.push(tempMarker);
+      }
 
       this.setState({
-        markers: markers
+        tempMarkers: tempMarkers
       });
-
-      console.log("addMarker called: " + marker);
-
-      var infowindow = new window.google.maps.InfoWindow({
-        content: '<div class="card" style="width: 18rem;"><img class="card-img-top" src=' + input['image'] + 
-        '><div class="card-body"><h5 class="card-title">' + input['name'] + 
-        '</h5><p class="card-text">Some quick example text to build on the card title and make up the bulk of the card content.</p><a href=' + input['link'] + 
-        ' class="btn btn-primary">Yelp it</a>&nbsp;<button class="btn btn-danger" onclick="removeMarker(\'' + marker['position'] + '\')">Remove</button></div></div>',   
-        maxWidth: 230
-      });
-
-      // WHY does it have to be an arrow function to get scope??
-      marker.addListener('click', (e) => {
-        infowindow.open(this.state.map, marker);
-      });
+    }).catch(e => {
+      console.log(e);
     });
 
     // console.log(sessionStorage.getItem("myCat"));
     // this.ScrollMarkers.handleMarkerChange();
+  }
+
+  addMarker(position) {
+    var markers = this.state.markers;
+    var tempMarkers = this.state.tempMarkers;
+
+    for (var i = 0; i < tempMarkers.length; i++) {
+      if (tempMarkers[i].marker.position == position) {
+        var tempMarker = tempMarkers[i];
+        var marker = new window.google.maps.Marker({
+          map: this.state.map,
+          position: tempMarkers[i].marker.position,
+          title: tempMarkers[i].marker.title,
+        });
+
+        var newMarker = {
+          marker: marker,
+          input: []
+        };
+
+        newMarker.input = {
+          name: tempMarker.input.name,
+          image: tempMarker.input.image,
+          link: tempMarker.input.link
+        }
+
+        var infoWindow = new window.google.maps.InfoWindow({
+          content: '<div class="card" style="width: 18rem;"><img class="card-img-top" src=' + tempMarker['input'].image + 
+          '><div class="card-body"><h5 class="card-title">' + tempMarker['input'].name + 
+          '</h5><p class="card-text">Some quick example text to build on the card title and make up the bulk of the card content.</p><button onclick="window.open(\'' + tempMarker['input'].link + 
+          '\')" class="btn btn-primary">Yelp it</button>&nbsp;<button class="btn btn-danger" onclick="removeMarker(\'' + tempMarker['marker'].position + '\')">Remove</button>&nbsp;<button class="btn btn-success" onclick="addMarker(\'' + tempMarker['marker'].position + '\')">Add</button></div></div>',   
+          maxWidth: 230
+        });
+
+        this.createListener(newMarker['marker'], infoWindow);
+        markers.push(tempMarker);
+      }
+    }
+
+    console.log("length of markers after add: " + markers.length);
+    this.setState({ markers: markers });
+    // this.setMapOnAll();
   }
 
   removeMarker(position) {
@@ -110,7 +178,7 @@ class Maps extends Component {
       }
     }
 
-    console.log(markers);
+    console.log("length of markers after removal: " + markers.length);
     this.setState({ markers: markers });
     // this.setMapOnAll();
   }
@@ -123,7 +191,7 @@ class Maps extends Component {
     return (
       <div>
         <div id="map" style={{height: 550}}></div>
-        <Forms addMarker={this.addMarker} displayRoute={this.displayRoute}/>
+        <Forms displayMarkers={this.displayMarkers} displayRoute={this.displayRoute}/>
         <div id="scroll" style={{height: 300}}>
           <ScrollMarkers ref={instance => {this.ScrollMarkers = instance;}} markers={this.state.markers}/>
         </div>

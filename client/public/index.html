@@ -66,6 +66,11 @@
         console.log("called removeMarker in index.html");
         socket.emit('remove', position);
       }
+
+      function addMarker(position) {
+        console.log("called addMarker in index.html");
+        socket.emit('add', position);
+      }
     </script>
 
     <!-- Optional JavaScript -->
