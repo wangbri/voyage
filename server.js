@@ -108,23 +108,50 @@ io.on('connection', function(socket) {
 
     	Promise.all(promises)
     	.then(results => {
-    		var min = 500000;
+    		var min = results[0];
     		var minIndex = 0;
-    		//console.log(results);
 
-    		for (var i = 0; i < results.length; i++) {
-    			var time = results[i];
+    		if(results.length > 3){
+	    		var secondMin = results[1];
+	    		var thirdMin = results[2];
+	    		var secondMinIndex = 1;
+	    		var thirdMinIndex = 2;
+	    		//console.log(results);
+	    		//results.sort();
 
-    			if (time < min) {
-    				min = time;
-    				minIndex = i;
-    			}
-    		}
+	    		for (var i = 0; i < results.length; i++) {
+	    			var time = results[i];
+	    			console.log(time);
+
+	    			if (time < min) {
+	    				thirdMin = secondMin;
+	    				thirdMinIndex = secondMinIndex;
+	    				secondMin = min;
+	    				secondMinIndex = minIndex;
+	    				min = time;
+	    				minIndex = i;
+	    			 } else if(time < secondMin){
+	    				thirdMin = secondMin;
+	    				thirdMinIndex = secondMinIndex;
+	    				secondMin = time;
+	    				secondMinIndex = i;
+	    			} else if(time < thirdMin){
+	    				thirdMin = time;
+	    				thirdMinIndex = i;
+	    			}
+	    		}
+	    	}
+
+
 
     		//TODO: Order the schedules
     		var smallest = {
-    			scheduleList: schedules[minIndex].getSpecificSchedule(),
-    			time: min
+    			smallestScheduleList: schedules[minIndex].getSpecificSchedule(),
+    			smallestTime: min,
+    			secondScheduleList: schedules[secondMinIndex].getSpecificSchedule(),
+    			secondTime: secondMin,
+    			thirdScheduleList: schedules[thirdMinIndex].getSpecificSchedule(),
+    			thirdTime: thirdMin
     		}
 
     		//console.log("emitting schedule");

@@ -63,7 +63,7 @@ var Schedule = (function (){
 				    for (var i = 0; i < route.legs.length; i++) {
 				    	sum += route.legs[i].duration.value;
 				    }
-				    console.log(sum);
+				    //console.log(sum);
 				    return sum;
 					//resolve(this.time);
 				 }) //function(err){

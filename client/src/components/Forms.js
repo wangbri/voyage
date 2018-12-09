@@ -61,10 +61,12 @@ class Form extends Component {
   }
 
   printSchedule(input){
-    console.log("in print sched");
-    console.log(input);
-    console.log(input.scheduleList);
-    console.log(input.time);
+    console.log(input.smallestScheduleList);
+    console.log(input.smallestTime);
+    console.log(input.secondScheduleList);
+    console.log(input.secondTime);
+    console.log(input.thirdScheduleList);
+    console.log(input.thirdTime);
   }
 
   render() {
