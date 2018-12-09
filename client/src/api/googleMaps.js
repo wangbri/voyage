@@ -31,6 +31,14 @@ export function receiveAdd(cb) {
   socket.on('add', data => cb(null, data));
 }
 
+export function receiveSmallest(cb) {
+  socket.on('smallest', data => cb(null,data));
+}
+
+export function getSmallest(data) {
+  socket.emit('smallest', data);
+}
+
 
 // draw the different directions  
 export function calculateAndDisplayRoute(addresses, directionsService, directionsDisplay) {
@@ -125,7 +133,8 @@ export function codeAddress(input, geocoder, map) {
         tempMarker.input = {
           name: input['name'],
           image: input['image'],
-          link: input['link']
+          link: input['link'],
+          location: input['location']
         }
 
         resolve(tempMarker);

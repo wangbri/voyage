@@ -28,6 +28,7 @@ var price;
 var startTime;
 var endTime;
 var transit;
+var fastSchedules;
 
 io.on('connection', function(socket) {
 	socket.on('yelp', function(data) {
@@ -109,6 +110,10 @@ io.on('connection', function(socket) {
 		io.emit('route', data);
 	})
 
+	socket.on('smallest', function(data) {
+		io.emit('smallest', fastSchedules);
+	})
+
 	socket.on('schedule', function(data){
 		console.log("in schedule: " + data);
 
@@ -160,7 +165,7 @@ io.on('connection', function(socket) {
     		var min = results[0];
     		var minIndex = 0;
 
-    		if(results.length > 3){
+    		if(results.length >= 3){
 	    		var secondMin = results[1];
 	    		var thirdMin = results[2];
 	    		var secondMinIndex = 1;
@@ -205,7 +210,12 @@ io.on('connection', function(socket) {
 
     		console.log("emitting schedule");
     		console.log(smallest.smallestScheduleList);
-    		io.emit('schedule', "");
+    		console.log(smallest.secondScheduleList);
+    		console.log(smallest.thirdScheduleList);
+
+    		fastSchedules = smallest;
+
+    		io.emit('schedule', data);
     	})
     	.catch(e => {
     		console.log(e);
