@@ -88,6 +88,10 @@ io.on('connection', function(socket) {
 		console.log(data);
 	})
 
+	socket.on('remove', function(data) {
+		io.emit('remove', data);
+	})
+
 	socket.on('route', function(data) {
 		io.emit('route', data);
 	})

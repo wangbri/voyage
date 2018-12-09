@@ -74,7 +74,7 @@ class Form extends Component {
     return (
       <div className="row" id="submitAddress">
         <input type="text" className="form-control" id="inputYelpAddress" placeholder="Specify a Yelp address.." value={this.state.value} onChange={this.handleYelpChange}></input>
-        <div class="btn-group">
+        <div className="btn-group">
           <button type="button" className="btn btn-primary" id="yelp-btn" onClick={this.handleYelpSubmit}>Submit Yelp Address</button>
           <a type="button" href="/results" className="btn btn-primary" id="generate-schedule-btn" onClick={this.handleGenerateScheduleSubmit}>Generate Schedule</a>
         </div>

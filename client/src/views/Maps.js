@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { codeAddress, calculateAndDisplayRoute } from '../api/googleMaps.js';
+import { receiveRemove, codeAddress, calculateAndDisplayRoute } from '../api/googleMaps.js';
 import Forms from '../components/Forms';
 import ScrollMarkers from '../components/Marker';
 
@@ -19,6 +19,9 @@ class Maps extends Component {
     this.displayRoute = this.displayRoute.bind(this);
     this.removeMarker = this.removeMarker.bind(this);
     this.setMapOnAll = this.setMapOnAll(this);
+
+    // receiveSchedule((err, data) => this.printSchedule(data));
+    receiveRemove((err, data) => this.removeMarker(data));
   }
 
   componentDidMount() {
@@ -67,7 +70,7 @@ class Maps extends Component {
     codeAddress(input, this.state.geocoder, this.state.map)
     .then(marker => {
       var markers = this.state.markers;
-      // markers.push(input);
+      
       markers.push({
         marker: marker,
         input: input
@@ -77,11 +80,13 @@ class Maps extends Component {
         markers: markers
       });
 
+      console.log("addMarker called: " + marker);
+
       var infowindow = new window.google.maps.InfoWindow({
         content: '<div class="card" style="width: 18rem;"><img class="card-img-top" src=' + input['image'] + 
         '><div class="card-body"><h5 class="card-title">' + input['name'] + 
         '</h5><p class="card-text">Some quick example text to build on the card title and make up the bulk of the card content.</p><a href=' + input['link'] + 
-        ' class="btn btn-primary">Yelp it</a>&nbsp;<button class="btn btn-danger">Remove</button></div></div>',   
+        ' class="btn btn-primary">Yelp it</a>&nbsp;<button class="btn btn-danger" onclick="removeMarker(\'' + marker['position'] + '\')">Remove</button></div></div>',   
         maxWidth: 230
       });
 
@@ -89,10 +94,6 @@ class Maps extends Component {
       marker.addListener('click', (e) => {
         infowindow.open(this.state.map, marker);
       });
-
-      console.log("marker input " + input['name']);
-      console.log(markers);
-      // console.log("addMarker called: " + markers[0].marker.title);
     });
 
     // console.log(sessionStorage.getItem("myCat"));

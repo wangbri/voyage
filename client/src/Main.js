@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { HashRouter, BrowserRouter, Switch, Route } from 'react-router-dom'
 import Maps from './views/Maps';
 import UserInput from './views/UserInput';
 import Results from './views/Results';

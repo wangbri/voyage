@@ -25,6 +25,10 @@ export function receiveSchedule(cb) {
   socket.on('schedule', data => cb(null, data));
 }
 
+export function receiveRemove(cb) {
+  socket.on('remove', data => cb(null, data));
+}
+
 
 // draw the different directions  
 export function calculateAndDisplayRoute(addresses, directionsService, directionsDisplay) {
