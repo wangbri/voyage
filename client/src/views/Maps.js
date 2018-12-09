@@ -81,7 +81,7 @@ class Maps extends Component {
         content: '<div class="card" style="width: 18rem;"><img class="card-img-top" src=' + input['image'] + 
         '><div class="card-body"><h5 class="card-title">' + input['name'] + 
         '</h5><p class="card-text">Some quick example text to build on the card title and make up the bulk of the card content.</p><a href=' + input['link'] + 
-        ' class="btn btn-primary">Yelp it</a>&nbsp;<button class="btn btn-danger"">Remove</button></div></div>',   
+        ' class="btn btn-primary">Yelp it</a>&nbsp;<button class="btn btn-danger">Remove</button></div></div>',   
         maxWidth: 230
       });
 

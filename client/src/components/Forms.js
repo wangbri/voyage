@@ -21,8 +21,8 @@ class Form extends Component {
 
     receiveYelpResult((err, data) => this.props.addMarker(data));
     receiveRoute((err, data) => this.props.displayRoute(data));
-    //receiveSchedule((err, data) => sendResult(data))
-    receiveSchedule((err, data) => this.printSchedule(data));
+    // receiveSchedule((err, data) => sendResult(data))
+    // receiveSchedule((err, data) => this.printSchedule(data));
   }
 
   handleYelpChange(event) {
@@ -60,6 +60,8 @@ class Form extends Component {
   }
 
   printSchedule(input){
+    console.log("in print schedule");
+
     console.log(input.smallestScheduleList);
     console.log(input.smallestTime);
     console.log(input.secondScheduleList);
@@ -74,7 +76,7 @@ class Form extends Component {
         <input type="text" className="form-control" id="inputYelpAddress" placeholder="Specify a Yelp address.." value={this.state.value} onChange={this.handleYelpChange}></input>
         <div class="btn-group">
           <button type="button" className="btn btn-primary" id="yelp-btn" onClick={this.handleYelpSubmit}>Submit Yelp Address</button>
-          <button type="button" className="btn btn-primary" id="generate-schedule-btn" onClick={this.handleGenerateScheduleSubmit}>Generate Schedule</button>
+          <a type="button" href="/results" className="btn btn-primary" id="generate-schedule-btn" onClick={this.handleGenerateScheduleSubmit}>Generate Schedule</a>
         </div>
       </div>
     );

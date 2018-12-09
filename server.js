@@ -103,7 +103,6 @@ io.on('connection', function(socket) {
 					var currentSched = new Schedule();
 					currentSched.addStart(data[a]);
 					currentSched.addEnd(data[b]);
-				
 
 					//generate a list of the intermediate places 
 			        var addresses  = [];
@@ -187,7 +186,8 @@ io.on('connection', function(socket) {
     			thirdTime: thirdMin
     		}
 
-    		//console.log("emitting schedule");
+    		console.log("emitting schedule");
+    		console.log(smallest);
     		io.emit('schedule', smallest);
     	})
     	.catch(e => {

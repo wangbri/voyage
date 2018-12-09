@@ -113,18 +113,48 @@ var Schedule = (function (){
 		//going to have to refine this
 		getSpecificSchedule: function(){
 			var places = [];
-			places.push(this.start);
-			for (var i = 0; i < this.placesInput.length; i++) {
-				places.push(this.placesInput[i])
+
+			var placesMarker1 = {
+				marker: [],
+				input: []
+			};
+
+			placesMarker1.input = {
+				name: this.start,
+				image: "https://placeholdit.imgix.net/~text?txtsize=16&txt=318%C3%97180&w=288&h=50"
 			}
-			places.push(this.end);
+
+			places.push(placesMarker1);
+
+			for (var i = 0; i < this.placesInput.length; i++) {
+				var placesMarker = {
+					marker: [],
+					input: []
+				};
+
+				placesMarker.input = {
+					name: this.placesInput[i],
+					image: "https://placeholdit.imgix.net/~text?txtsize=16&txt=318%C3%97180&w=288&h=50"
+				}
+
+				places.push(placesMarker)
+			}
+
+			var placesMarker2 = {
+				marker: [],
+				input: []
+			};
+
+			placesMarker2.input = {
+				name: this.end,
+				image: "https://placeholdit.imgix.net/~text?txtsize=16&txt=318%C3%97180&w=288&h=50"
+			}
+
+			places.push(placesMarker2);
+			
 			return places;
 		}
-
 	}
-
-	
-	
 })
 
 module.exports = Schedule;
