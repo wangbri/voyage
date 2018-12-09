@@ -6,9 +6,9 @@ class UserInput extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      location: "",
-      price: "",
-      transit: "",
+      location: "austin, tx",
+      price: "$",
+      transit: "driving",
       start: "",
       end: ""
     }
@@ -77,9 +77,9 @@ class UserInput extends Component {
           </div>
           <div class="col">
             <select id="inputState" className="form-control" onChange={this.handleTransitChange}>
-              <option selected>DRIVING</option>
-              <option>BICYCLING</option>
-              <option>WALKING</option>
+              <option selected>driving</option>
+              <option>bicycling</option>
+              <option>walking</option>
             </select>
           </div>
           <div className="col">

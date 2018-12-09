@@ -36,21 +36,23 @@ io.on('connection', function(socket) {
 		// var location;
 		// var sessionLocation = sessionStorage.getItem("location");
 
+		var priceString;
+
 		if (location == "" || location == undefined) {
 			location = "austin, tx";
 		}
 
 		if (price == undefined) {
-			price = "1";
+			priceString = "1";
 		} else {
 			console.log("price " + price);
-			price = price.match(/\$/g).length;
+			priceString = price.match(/\$/g).length;
 		}
 
 		client.search({
 			term: data,
 			location: location,
-			price: price
+			price: priceString
 		}).then(response => {
 			var business = response.jsonBody.businesses[0];
 
@@ -131,7 +133,7 @@ io.on('connection', function(socket) {
   //   	}
 
     	let promises = schedules.map((schedule, index) => {
-    		var time = schedule.calculateTime();
+    		var time = schedule.calculateTime(transit);
     		//console.log(time);
 
     		return time;

@@ -31,7 +31,7 @@ var Schedule = (function (){
 		},
 
 
-		calculateTime: function(){
+		calculateTime: function(transportation){
 			//var directionsService = new window.google.maps.DirectionsService();
 			const googleMapsClient = require('@google/maps').createClient({
   				key: 'AIzaSyDLG4cmhAVyeZ8ni6geScmGt3azChgMwR0',
@@ -53,7 +53,7 @@ var Schedule = (function (){
 			  	return googleMapsClient.directions({
 			      	origin: this.start,
 			      	destination: this.end,
-			      	mode: 'driving',
+			      	mode: transportation,
 			      	waypoints: waypts,
 			      	optimize: true,
 			    })
