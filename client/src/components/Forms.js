@@ -29,7 +29,6 @@ class Form extends Component {
   handleYelpSubmit(event) {
     // window.socket.emit('yelp', this.state.value);
     // console.log(this.state.value);
-
     sendYelpAddress(this.state.value);
   }
 

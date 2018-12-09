@@ -111,47 +111,52 @@ export function codeAddress(input, geocoder, map) {
     link = input['link'];
   }
 
-  geocoder.geocode({'address': address}, function(results, status) {
-    if (status == 'OK') {
-      map.setCenter(results[0].geometry.location);
+  return new Promise(function(resolve, reject) {
+    geocoder.geocode({'address': address}, function(results, status) {
+      if (status == 'OK') {
+        map.setCenter(results[0].geometry.location);
 
-      if (input != null) {
-        map.setZoom(16);
+        if (input != null) {
+          map.setZoom(16);
+        }
+
+        var marker = new window.google.maps.Marker({
+          map: map,
+          position: results[0].geometry.location,
+          title: results[0].formatted_address
+        });
+
+        locationsMarkers.push({
+          key: name,
+          value: marker
+        });
+
+
+        if (name == null) {
+          name = results[0].formatted_address;
+        }
+
+        // var infowindow = new window.google.maps.InfoWindow({
+        //   content: '<div class="card" style="width: 18rem;"><img class="card-img-top" src=' + image + 
+        //   '><div class="card-body"><h5 class="card-title">' + name + 
+        //   '</h5><p class="card-text">Some quick example text to build on the card title and make up the bulk of the card content.</p><a href=' + link + 
+        //   ' class="btn btn-primary">Yelp it</a>&nbsp;<button class="btn btn-danger" onclick="removeMarker(\'' + marker['position'] + 
+        //   '\')">Remove</button></div></div>',   
+        //   maxWidth: 230
+        // });
+
+        // marker.addListener('click', function() {
+        //   infowindow.open(map, marker);
+        // });
+
+        resolve(marker);
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+        reject("Geocode was not successful");
       }
 
-      var marker = new window.google.maps.Marker({
-        map: map,
-        position: results[0].geometry.location,
-        title: results[0].formatted_address
-      });
-
-      locationsMarkers.push({
-        key: name,
-        value: marker
-      });
-
-
-      if (name == null) {
-        name = results[0].formatted_address;
-      }
-
-      var infowindow = new window.google.maps.InfoWindow({
-        content: '<div class="card" style="width: 18rem;"><img class="card-img-top" src=' + image + 
-        '><div class="card-body"><h5 class="card-title">' + name + 
-        '</h5><p class="card-text">Some quick example text to build on the card title and make up the bulk of the card content.</p><a href=' + link + 
-        ' class="btn btn-primary">Yelp it</a>&nbsp;<button class="btn btn-danger" onclick="removeMarker(\'' + marker['position'] + 
-        '\')">Remove</button></div></div>',   
-        maxWidth: 230
-      });
-
-      marker.addListener('click', function() {
-        infowindow.open(map, marker);
-      });
-    } else {
-      alert('Geocode was not successful for the following reason: ' + status);
-    }
-
-    // markers.push(marker);
+      // markers.push(marker);
+    });
   });
 }
 

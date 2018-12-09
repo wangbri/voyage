@@ -37,11 +37,10 @@ class ScrollMarkers extends Component {
 		}
 
 		//"https://placeholdit.imgix.net/~text?txtsize=16&txt=318%C3%97180&w=288&h=50"
-
 		const child = { width: `20em`, height: `50em`, marginLeft: `10px`, marginRight: childWidth, marginTop: `10px`}
 
 		return (
-			<div style={child}><Marker title={marker.name} image={marker.image}/></div>
+			<div style={child}><Marker title={marker.input.name} image={marker.input.image}/></div>
 		);
 	}
 

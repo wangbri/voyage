@@ -22,13 +22,34 @@ server.listen(port);
 var yelpApiKey = "NEn7XfiaTVpyx6BHgI2qK1jS06buyf3YX2f_DH_0QhzdaoNWAJgWgO-D9OuwEK6quEpDTyTX4brSUQYZnfe5BEf4PEtdRQsfyB1o_LvaNY3EetwavPSMesUpkVzTW3Yx";
 const client = yelp.client(yelpApiKey);
 
+var location;
+var price;
+var startTime;
+var endTime;
+var transit;
+
 io.on('connection', function(socket) {
 	socket.on('yelp', function(data) {
 		console.log(data);
 
+		// var location;
+		// var sessionLocation = sessionStorage.getItem("location");
+
+		if (location == "" || location == undefined) {
+			location = "austin, tx";
+		}
+
+		if (price == undefined) {
+			price = "1";
+		} else {
+			console.log("price " + price);
+			price = price.match(/\$/g).length;
+		}
+
 		client.search({
 			term: data,
-			location: 'austin, tx'
+			location: location,
+			price: price
 		}).then(response => {
 			var business = response.jsonBody.businesses[0];
 
@@ -52,6 +73,16 @@ io.on('connection', function(socket) {
 		}).catch(e => {
 		  console.log(e);
 		});
+	})
+
+	socket.on('input', function(data) {
+		location = data.location;
+		price = data.price;
+		startTime = data.start;
+		endTime = data.end;
+		transit = data.transit;
+
+		console.log(data);
 	})
 
 	socket.on('route', function(data) {
