@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { sendYelpAddress, receiveYelpResult } from '../api/yelp.js';
-import { sendRoute, receiveRoute, createSchedule } from '../api/googleMaps.js';
+import { sendRoute, receiveRoute, createSchedule, receiveSchedule } from '../api/googleMaps.js';
 
 class Form extends Component {
   constructor(props) {
@@ -17,9 +17,12 @@ class Form extends Component {
     this.handleYelpChange = this.handleYelpChange.bind(this);
     this.handleAddressSubmit = this.handleAddressSubmit.bind(this);
     this.handleAddressChange = this.handleAddressChange.bind(this);
+    this.printSchedule = this.printSchedule.bind(this);
 
     receiveYelpResult((err, data) => this.props.addMarker(data));
     receiveRoute((err, data) => this.props.displayRoute(data));
+    //receiveSchedule((err, data) => sendResult(data))
+    receiveSchedule((err, data) => this.printSchedule(data));
   }
 
   handleYelpChange(event) {
@@ -54,6 +57,15 @@ class Form extends Component {
 
   handleGenerateScheduleSubmit(event){
     createSchedule();
+  }
+
+  printSchedule(input){
+    console.log(input.smallestScheduleList);
+    console.log(input.smallestTime);
+    console.log(input.secondScheduleList);
+    console.log(input.secondTime);
+    console.log(input.thirdScheduleList);
+    console.log(input.thirdTime);
   }
 
   render() {
