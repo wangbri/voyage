@@ -56,10 +56,15 @@ class Maps extends Component {
   addMarker(input) {
     codeAddress(input, this.state.geocoder, this.state.map);
     var markers = this.state.markers;
-    markers.push(input.title);
+    markers.push(input);
     this.setState({
       markers: markers
     });
+
+    console.log("marker input " + input['name']);
+    console.log("addMarker called: " + markers[0].name);
+
+    // this.ScrollMarkers.handleMarkerChange();
   }
 
   displayRoute(input) {
@@ -72,7 +77,7 @@ class Maps extends Component {
         <div id="map" style={{height: 550}}></div>
         <Forms addMarker={this.addMarker} displayRoute={this.displayRoute}/>
         <div id="scroll" style={{height: 300}}>
-          <ScrollMarkers markers={this.state.markers}/>
+          <ScrollMarkers ref={instance => {this.ScrollMarkers = instance;}} markers={this.state.markers}/>
         </div>
       </div>
     );
