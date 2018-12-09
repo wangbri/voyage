@@ -67,26 +67,6 @@ class Schedule {
 	get totalTime(){
 		return this.time;
 	}
-
-	// get numPlaces(){
-	// 	return places.length;	
-	// }
-
-	// get placeIndex(index){
-	// 	return this.places[index];
-	// }
-
-	// get durationIndex(index){
-	// 	return this.duration[index];
-	// }
-
-	// get totalDuration(){
-	// 	var sum = 0;
-	// 	for(var i = 0; i < this.places.length; i ++){
-
-	// 	}
-	// 	return sum;
-	// }
 	
 }
 

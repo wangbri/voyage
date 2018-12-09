@@ -1,3 +1,4 @@
+var Schedule = require('./Schedule.js');
 const express = require('express');
 const path = require('path');
 const yelp = require('yelp-fusion');
@@ -56,6 +57,82 @@ io.on('connection', function(socket) {
 
 	socket.on('route', function(data) {
 		io.emit('route', data);
+	})
+
+	socket.on('schedule', function(data){
+		console.log(data);
+
+		var schedules = []; //the different list 
+
+		for(var a = 0; a < data.length; a++){
+			for(var b = 0; b < data.length; b++){
+				if(a !== b){
+					var currentSched = new Schedule();
+					currentSched.addStart(data[a]);
+					currentSched.addEnd(data[b]);
+				
+
+					//generate a list of the intermediate places 
+			        var addresses  = [];
+			        for(var c = 0; c < data.length; c++){
+			        	if((data[a] != data[c]) && (data[b] != data[c])){
+			        		addresses.push(data[c]);
+			        	}
+			        }
+
+			        currentSched.addPlace(addresses);
+			        schedules.push(currentSched);
+		    	}
+				
+			}
+		}
+
+		// var min = 500000; //schedules[0].calculateTime();
+		// var minIndex = 0;
+		// for(var i = 1; i < schedules.length; i++){
+  //      		//schedules[i].calculateTime()
+  //       	var curTime = schedules[i].calculateTime();
+  //       	//console.log(curTime);
+  //       	if(curTime < min){
+  //       		min = curTime;
+  //       		minIndex = i;
+  //       	}
+  //   	}
+
+    	let promises = schedules.map((schedule, index) => {
+    		var time = schedule.calculateTime();
+    		//console.log(time);
+
+    		return time;
+    	});
+
+    	Promise.all(promises)
+    	.then(results => {
+    		var min = 500000;
+    		var minIndex = 0;
+    		//console.log(results);
+
+    		for (var i = 0; i < results.length; i++) {
+    			var time = results[i];
+
+    			if (time < min) {
+    				min = time;
+    				minIndex = i;
+    			}
+    		}
+
+    		//TODO: Order the schedules
+    		var smallest = {
+    			scheduleList: schedules[minIndex].getSpecificSchedule(),
+    			time: min
+    		}
+
+    		//console.log("emitting schedule");
+    		io.emit('schedule', smallest);
+    	})
+    	.catch(e => {
+    		console.log(e);
+    	})
 	})
 })
 
