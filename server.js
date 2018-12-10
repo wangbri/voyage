@@ -177,15 +177,18 @@ io.on('connection', function(socket) {
 
 			        currentSched.addPlace(addresses);
 			        schedules.push(currentSched);
+			        //console.log(currentSched);
 		    	}
 				
 			}
 		}
 
 
+		console.log(schedules.length);
+
     	let promises = schedules.map((schedule, index) => {
     		var time = schedule.calculateTime(transit);
-    		//console.log(time);
+    		console.log(time);
 
     		return time;
     	});
@@ -241,15 +244,14 @@ io.on('connection', function(socket) {
     			return needFilter;
 			});
 
-			console.log("Filtered");
-			console.log(filtered);
-			console.log(filteredIndex);
+			// console.log("Filtered");
+			// console.log(filtered);
+			// console.log(filteredIndex);
 
 
 			if(results.length != filtered.length){		
 
 				for(var j = 0; j < results.length; j++){
-					console.log("Filter index contains " + j + " " + filteredIndex.contains(j));
 	    			if(!filteredIndex.contains(j)){
 		    			min = results[j];
 		    			minIndex = j;
@@ -303,16 +305,16 @@ io.on('connection', function(socket) {
 
 		    	smallest.smallestScheduleList = schedules[minIndex].getSpecificSchedule();
     			smallest.smallestTime = min;
-    			smallest.smallestScheduleList = schedules[secondMinIndex].getSpecificSchedule();
-    			smallest.smallestTime = secondMin;
-    			smallest.smallestScheduleList = schedules[thirdMinIndex].getSpecificSchedule();
-    			smallest.smallestTime = thirdMin;
+    			smallest.secondScheduleList = schedules[secondMinIndex].getSpecificSchedule();
+    			smallest.secondTime = secondMin;
+    			smallest.thirdScheduleList = schedules[thirdMinIndex].getSpecificSchedule();
+    			smallest.thirdTime = thirdMin;
 		    } else {
 		    	smallest.valid = false;
 
 		    }
 
-		    console.log(smallest.valid);
+		    //console.log(smallest.valid);
 
 
 
@@ -330,10 +332,13 @@ io.on('connection', function(socket) {
 
 
 
-    		console.log("emitting schedule");
-    		console.log(smallest.smallestScheduleList);
-    		console.log(smallest.secondScheduleList);
-    		console.log(smallest.thirdScheduleList);
+    		// console.log("emitting schedule");
+    		// console.log(smallest.smallestScheduleList);
+    		// console.log(smallest.smallestTime);
+    		// console.log(smallest.secondScheduleList);
+    		// console.log(smallest.secondTime);
+    		// console.log(smallest.thirdScheduleList);
+    		// console.log(smallest.thirdTime);
 
     		fastSchedules = smallest;
 

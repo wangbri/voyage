@@ -9,8 +9,8 @@ class UserInput extends Component {
       location: "austin, tx",
       price: "$",
       transit: "driving",
-      start: "1200",
-      end: "1230"
+      start: "800",
+      end: "2100"
     }
 
     this.sendInputs = this.sendInputs.bind(this);
@@ -126,7 +126,7 @@ class UserInput extends Component {
                     </div>
                     <div className="form-row">
                       <div className="col-md-1 mb-1">
-                        <button className="btn btn-primary" type="submit" onClick={this.sendInputs}>Send Input</button>
+                        <a href="./map" className="btn btn-primary" type="submit" onClick={this.sendInputs}>Send Input</a>
                       </div>
                     </div>
                   </form>

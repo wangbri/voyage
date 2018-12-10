@@ -41,6 +41,10 @@ var Schedule = (function (){
 			var waypts = [];
 			var sum = 0;
 
+			console.log("calculate Time " + this.start.location + " " + this.end.location);
+			// console.log(this.start.location);
+			// console.log(this.end.location);
+
 			  // use waypoints for intermediate destinations
 			  for (var i = 0; i < this.placesInput.length; i++) {
 			    waypts.push({
@@ -122,7 +126,7 @@ var Schedule = (function (){
 			}
 
 			places.push(placesMarker2);
-			console.log(places);
+			//console.log(places);
 			
 			return places;
 		}
