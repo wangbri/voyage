@@ -13,8 +13,7 @@ class Splash extends Component {
       <div>
         <nav className="navbar navbar-light bg-light static-top">
           <div className="container">
-            <a className="navbar-brand" href="#">Start Bootstrap</a>
-            <a className="btn btn-primary" href="#">Sign In</a>
+            <a className="navbar-brand" href="#">A project for EE461L.</a>
           </div>
         </nav>
 
@@ -26,16 +25,9 @@ class Splash extends Component {
                 <h1 className="mb-5">Voyage! Your one-stop shop for travel plans.</h1>
               </div>
               <div className="col-md-10 col-lg-8 col-xl-7 mx-auto">
-                <form>
-                  <div className="form-row">
-                    <div className="col-12 col-md-9 mb-2 mb-md-0">
-                      <input type="email" className="form-control form-control-lg" placeholder="Enter your email..."></input>
-                    </div>
-                    <div className="col-12 col-md-3">
-                      <a type="submit" href="./input" className="btn btn-block btn-lg btn-primary">Sign up!</a>
-                    </div>
-                  </div>
-                </form>
+                <div>
+                  <a type="submit" href="./input" className="btn btn-lg btn-primary">Start your adventure today!</a>
+                </div>
               </div>
             </div>
           </div>
@@ -150,7 +142,7 @@ class Splash extends Component {
           <div className="container">
             <div className="row">
               <div className="col-xl-9 mx-auto">
-                <h2 className="mb-4">Ready to get started? Sign up now!</h2>
+                <h2 className="mb-4">Ready to get started?</h2>
               </div>
               <div className="col-md-10 col-lg-8 col-xl-7 mx-auto">
                 <form>
