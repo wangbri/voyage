@@ -63,7 +63,7 @@ class UserInput extends Component {
   render() {
     return (
       <div>
-        <header className="masthead text-white text-center">
+        <header className="masthead2 text-white text-center">
           <div className="overlay"></div>
           <div className="container">
             <div className="row">
@@ -126,7 +126,7 @@ class UserInput extends Component {
                     </div>
                     <div className="form-row">
                       <div className="col-md-1 mb-1">
-                        <button type="button" className="btn btn-primary" type="submit" onClick={this.sendInputs}>Send Input</button>
+                        <button className="btn btn-primary" type="submit" onClick={this.sendInputs}>Send Input</button>
                       </div>
                     </div>
                   </form>

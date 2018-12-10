@@ -28,6 +28,15 @@ header.masthead {
   padding-bottom: 8rem;
 }
 
+header.masthead2 {
+  position: relative;
+  background-color: #343a40;
+  background: url("../img/bg-masthead.jpg") no-repeat center center;
+  background-size: cover;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+
 header.masthead .overlay {
   position: absolute;
   background-color: #212529;

@@ -142,7 +142,7 @@ class Splash extends Component {
           <div className="container">
             <div className="row">
               <div className="col-xl-9 mx-auto">
-                <h2 className="mb-4">Ready to get started? Sign up now!</h2>
+                <h2 className="mb-4">Ready to get started?</h2>
               </div>
               <div className="col-md-10 col-lg-8 col-xl-7 mx-auto">
                 <form>
