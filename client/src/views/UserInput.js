@@ -72,7 +72,7 @@ class UserInput extends Component {
                   <form className="needs-validation" novalidate>
                     <div className="form-row">
                       <div className="col-md-3 mb-3">
-                        <label styles="font-weight: bold;" for="validationCustom01">Where do you plan to travel?</label>
+                        <label for="validationCustom01">Where do you plan to travel?</label>
                         <input type="text" className="form-control" id="validationCustom01" placeholder="Specify a location..." value={this.state.location} onChange={this.handleLocationChange} required></input>
                         <div className="valid-feedback">
                           Looks good!

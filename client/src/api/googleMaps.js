@@ -39,6 +39,15 @@ export function getSmallest(data) {
   socket.emit('smallest', data);
 }
 
+export function displaySched(cb) {
+  socket.on('doneGenerating', data => cb(null,data));
+}
+
+export function doneGenerating() {
+  socket.emit('doneGenerating');
+}
+
+
 
 // draw the different directions  
 export function calculateAndDisplayRoute(addresses, directionsService, directionsDisplay) {
