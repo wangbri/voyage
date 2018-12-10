@@ -27,7 +27,7 @@ var Schedule = (function (){
 		addPlace: function(place) {
 			this.placesInput = place;
 			//console.log("New schedule");
-			this.calculateTime();
+			// this.calculateTime();
 		},
 
 

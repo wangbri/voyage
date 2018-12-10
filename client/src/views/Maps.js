@@ -108,9 +108,9 @@ class Maps extends Component {
 
       for (var i = 0; i < results.length; i++) {
         var tempMarker = results[i];
-        console.log("in displayMarkers: " + tempMarker['marker'].position);
-        console.log("in displayMarkers: " + tempMarker['input'].name);
-        console.log("in displayMarkers: " + tempMarker['input'].location);
+        // console.log("in displayMarkers: " + tempMarker['marker'].position);
+        // console.log("in displayMarkers: " + tempMarker['input'].name);
+        // console.log("in displayMarkers: " + tempMarker['input'].location);
 
         var infoWindow = new window.google.maps.InfoWindow({
           content: '<div class="card" style="width: 18rem;"><img class="card-img-top" src=' + tempMarker['input'].image + 
