@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { receiveAdd, receiveRemove, codeAddress, calculateAndDisplayRoute, receiveSmallest, getSmallest, receiveSchedule } from '../api/googleMaps.js';
+import { receiveAdd, receiveRemove, codeAddress, calculateAndDisplayRoute, receiveSmallest, getSmallest, receiveSchedule, doneGenerating } from '../api/googleMaps.js';
 import Forms from '../components/Forms';
 import ScrollMarkers from '../components/Marker';
 
@@ -220,6 +220,9 @@ class Maps extends Component {
       secondPlaces: secondSmallest,
       thirdPlaces: thirdSmallest
     });
+
+    doneGenerating();
+    calculateAndDisplayRoute(this.state.smallestPlaces, this.state.directionsService, this.state.directionsDisplay);
 
     //places = [this.state.smallestPlaces, this.state.secondPlaces, this.state.thirdPlaces];
   }

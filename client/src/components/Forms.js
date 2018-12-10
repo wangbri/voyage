@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { sendYelpAddress, receiveYelpResult } from '../api/yelp.js';
-import { sendRoute, receiveRoute, createSchedule } from '../api/googleMaps.js';
+import { sendRoute, receiveRoute, createSchedule, displaySched } from '../api/googleMaps.js';
 
 class Form extends Component {
   constructor(props) {
@@ -19,16 +19,26 @@ class Form extends Component {
     this.handleAddressSubmit = this.handleAddressSubmit.bind(this);
     this.handleAddressChange = this.handleAddressChange.bind(this);
     this.handleGenerateScheduleSubmit = this.handleGenerateScheduleSubmit.bind(this);
+    this.displaySchedType = this.displaySchedType.bind(this);
     // this.printSchedule = this.printSchedule.bind(this);
 
     receiveYelpResult((err, data) => this.props.displayMarkers(data));
     receiveRoute((err, data) => this.props.displayRoute(data));
+    displaySched((err, data) => this.displaySchedType(data));
     // receiveSchedule((err, data) => sendResult(data))
     // receiveSchedule((err, data) => this.printSchedule(data));
   }
 
   handleYelpChange(event) {
     this.setState({value: event.target.value});
+  }
+
+  displaySchedType(data){
+    document.getElementById("inputState").style.display = "block";
+  }
+
+  componentDidMount() {
+    document.getElementById("inputState").style.display = "none";
   }
 
   handleYelpSubmit(event) {
@@ -88,6 +98,8 @@ class Form extends Component {
         <div className="btn-group">
           <button type="button" className="btn btn-primary" id="yelp-btn" onClick={this.handleYelpSubmit}>Submit Yelp Address</button>
           <button type="button" className="btn btn-primary" id="generate-schedule-btn" onClick={this.handleGenerateScheduleSubmit}>Generate Schedule</button>
+          <a href="./results" type="button" className="btn btn-primary">Display Schedules</a>
+
         </div>
         <div class="col">
             <select id="inputState" className="form-control" onChange={this.props.handleScheduleChange}>

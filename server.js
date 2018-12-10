@@ -120,6 +120,10 @@ io.on('connection', function(socket) {
 		io.emit('smallest', fastSchedules);
 	})
 
+	socket.on('doneGenerating', function() {
+		io.emit('doneGenerating', " ");
+	})
+
 	socket.on('saveSchedule', function(data) {
 		// console.log("generated room at /" + data);
 

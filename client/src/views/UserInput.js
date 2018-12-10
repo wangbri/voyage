@@ -90,7 +90,7 @@ class UserInput extends Component {
               <input type="text" className="form-control" placeholder="Specify an ending time..." value={this.state.end} onChange={this.handleEndChange}></input>
             </div>
             <div className="col">
-              <button type="button" className="btn btn-primary" onClick={this.sendInputs}>Send Input</button>
+              <a href="./map" type="button" className="btn btn-primary" onClick={this.sendInputs}>Send Input</a>
             </div>
           </div>
         </div>
