@@ -121,6 +121,7 @@ var Schedule = (function (){
 
 			placesMarker1.input = {
 				name: this.start.name,
+				location: this.start.location,
 				image: this.start.image //"https://placeholdit.imgix.net/~text?txtsize=16&txt=318%C3%97180&w=288&h=50"
 			}
 
@@ -134,6 +135,7 @@ var Schedule = (function (){
 
 				placesMarker.input = {
 					name: this.placesInput[i].name,
+					location: this.placesInput[i].location,
 					image: this.placesInput[i].image //"https://placeholdit.imgix.net/~text?txtsize=16&txt=318%C3%97180&w=288&h=50"
 				}
 
@@ -147,6 +149,7 @@ var Schedule = (function (){
 
 			placesMarker2.input = {
 				name: this.end.name,
+				location: this.end.location,
 				image: this.end.image //"https://placeholdit.imgix.net/~text?txtsize=16&txt=318%C3%97180&w=288&h=50"
 			}
 
