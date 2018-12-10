@@ -4,14 +4,18 @@ const path = require('path');
 const yelp = require('yelp-fusion');
 
 const app = express()
-  .use(express.static(path.join(__dirname, 'client/public')))
-  .set('views', path.join(__dirname, 'views'))
-  .get('/', (req, res) => res.redirect('aboutus.html'))
+  .use(express.static(path.join(__dirname, 'client/build')))
+  // .set('views', path.join(__dirname, 'views'))
+  // .get('/', (req, res) => res.redirect('aboutus.html'))
   // .get('/api/hello', (req, res) => {
   //   res.send({ express: 'Hello From Express' });
   // });
 
 // app.use('/static', express.static(path.join(__dirname, 'client/public')));
+app.get('*', (req,res) =>{
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
+
 const port = process.env.PORT || 5000;
 
 // app.listen(port, () => console.log(`Listening on port ${port}`));
@@ -19,7 +23,7 @@ const port = process.env.PORT || 5000;
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
-server.listen(port);
+app.listen(port);
 
 var yelpApiKey = "NEn7XfiaTVpyx6BHgI2qK1jS06buyf3YX2f_DH_0QhzdaoNWAJgWgO-D9OuwEK6quEpDTyTX4brSUQYZnfe5BEf4PEtdRQsfyB1o_LvaNY3EetwavPSMesUpkVzTW3Yx";
 const client = yelp.client(yelpApiKey);
