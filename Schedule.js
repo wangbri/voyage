@@ -121,7 +121,7 @@ var Schedule = (function (){
 
 			placesMarker1.input = {
 				name: this.start.name,
-				image: "https://placeholdit.imgix.net/~text?txtsize=16&txt=318%C3%97180&w=288&h=50"
+				image: this.start.image //"https://placeholdit.imgix.net/~text?txtsize=16&txt=318%C3%97180&w=288&h=50"
 			}
 
 			places.push(placesMarker1);
@@ -134,7 +134,7 @@ var Schedule = (function (){
 
 				placesMarker.input = {
 					name: this.placesInput[i].name,
-					image: "https://placeholdit.imgix.net/~text?txtsize=16&txt=318%C3%97180&w=288&h=50"
+					image: this.placesInput[i].image //"https://placeholdit.imgix.net/~text?txtsize=16&txt=318%C3%97180&w=288&h=50"
 				}
 
 				places.push(placesMarker)
@@ -147,7 +147,7 @@ var Schedule = (function (){
 
 			placesMarker2.input = {
 				name: this.end.name,
-				image: "https://placeholdit.imgix.net/~text?txtsize=16&txt=318%C3%97180&w=288&h=50"
+				image: this.end.image //"https://placeholdit.imgix.net/~text?txtsize=16&txt=318%C3%97180&w=288&h=50"
 			}
 
 			places.push(placesMarker2);
