@@ -69,8 +69,10 @@ io.on('connection', function(socket) {
 			for (var i = 0; i < length; i++) {
 				var business = response.jsonBody.businesses[i];
 
+				var businessLocation = business.location;
+
 				var name = business.name;	
-				var location = business.location.address1;
+				var location = businessLocation.address1 + ", " + businessLocation.city + ", " + businessLocation.state;
 				var image = business.image_url;
 				var link = business.url;
 
