@@ -138,8 +138,8 @@ class UserInput extends Component {
                   <div className="features-icons-icon d-flex">
                     <i className="icon-screen-desktop m-auto text-primary"></i>
                   </div>
-                  <h3>Fully Responsive</h3>
-                  <p className="lead mb-0">This theme will look great on any device, no matter the size!</p>
+                  <h3>Input your preferences</h3>
+                  <p className="lead mb-0">Tell us your travel method, budget, and what city you want to explore</p>
                 </div>
               </div>
               <div className="col-lg-4">
@@ -147,8 +147,8 @@ class UserInput extends Component {
                   <div className="features-icons-icon d-flex">
                     <i className="icon-layers m-auto text-primary"></i>
                   </div>
-                  <h3>Bootstrap 4 Ready</h3>
-                  <p className="lead mb-0">Featuring the latest build of the new Bootstrap 4 framework!</p>
+                  <h3>Pick your locations</h3>
+                  <p className="lead mb-0">Pick from the different markers on the map generated just for you</p>
                 </div>
               </div>
               <div className="col-lg-4">
@@ -156,8 +156,8 @@ class UserInput extends Component {
                   <div className="features-icons-icon d-flex">
                     <i className="icon-check m-auto text-primary"></i>
                   </div>
-                  <h3>Easy to Use</h3>
-                  <p className="lead mb-0">Ready to use with your own content, or customize the source files!</p>
+                  <h3>Get your unique schedule</h3>
+                  <p className="lead mb-0">Embark on your journey and have fun!</p>
                 </div>
               </div>
             </div>
