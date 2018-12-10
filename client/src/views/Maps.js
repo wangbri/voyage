@@ -170,7 +170,7 @@ class Maps extends Component {
         });
 
         this.createListener(newMarker['marker'], infoWindow);
-        markers.push(tempMarker);
+        markers.push(newMarker);
       }
     }
 
@@ -185,6 +185,7 @@ class Maps extends Component {
     for (var i = 0; i < markers.length; i++) {
       if (markers[i].marker.position == position) {
         markers[i].marker.setMap(null);
+        markers[i].marker = null;
         markers.splice(i, 1);
       }
     }
@@ -195,7 +196,7 @@ class Maps extends Component {
   }
 
   receiveRoute(input) {
-    console.log("In receiveRoute");
+    console.log("in receiveRoute");
     console.log(input);
     //console.log(input[0]);
 
@@ -210,11 +211,9 @@ class Maps extends Component {
         thirdSmallest.push(input.thirdScheduleList[i].input.location);
       }
     } else{
-      alert("No possible schedule");
+      alert("No possible schedule found.");
       window.location.href ="./input";
     }
-
-
 
     // this.setState({smallestPlaces : ['2247 Guadalupe St', '3825 Lake Austin Blvd, Austin, Texas 78703', 'East 41st Street, Austin, TX'],
     //             secondPlaces: ['3825 Lake Austin Blvd, Austin, Texas 78703', '2247 Guadalupe St', 'East 41st Street, Austin, TX'],
@@ -235,13 +234,12 @@ class Maps extends Component {
   }
 
   getSchedule(input){
-    console.log("In getSchedule");
+    console.log("in getSchedule");
     console.log(input);
     getSmallest("");
   }
 
   displayRoute(schedType) {
-
     //var schedType = this.state.scheduleType;
 
     var smallest = this.state.smallestPlaces;
@@ -250,9 +248,6 @@ class Maps extends Component {
 
     console.log(schedType);
 
-
-
-
     if(schedType == "smallest"){
       calculateAndDisplayRoute(smallest, this.state.directionsService, this.state.directionsDisplay);
     } else if (schedType  == "second smallest"){
@@ -260,7 +255,6 @@ class Maps extends Component {
     } else{
       calculateAndDisplayRoute(third, this.state.directionsService, this.state.directionsDisplay);
     }
-
 
     //calculateAndDisplayRoute(smallestScheduleList, this.state.directionsService, this.state.directionsDisplay);
   }

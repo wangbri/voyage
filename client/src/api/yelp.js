@@ -5,6 +5,7 @@ const socket = openSocket('http://localhost:8000');
 //   socket.on('timer', timestamp => cb(null, timestamp));
 //   socket.emit('subscribeToTimer', 1000);
 // }
+
 export function sendInputs(input) {
 	socket.emit('input', input);
 }

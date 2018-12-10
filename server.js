@@ -45,17 +45,19 @@ io.on('connection', function(socket) {
 		// var location;
 		// var sessionLocation = sessionStorage.getItem("location");
 
-		var priceString;
+		var priceString = "";
 
 		if (location == "" || location == undefined) {
 			location = "austin, tx";
 		}
 
-		if (price == undefined) {
-			priceString = "1";
-		} else {
+		if (price != undefined) {
 			console.log("price " + price);
-			priceString = price.match(/\$/g).length;
+			var maxPrice = price.match(/\$/g).length;
+
+			for (var i = 1; i < maxPrice; i++) {
+				priceString += "," + i;
+			}
 		}
 
 		client.search({
@@ -66,7 +68,7 @@ io.on('connection', function(socket) {
 			var data = [];
 			var length = 5;
 
-			if (response.jsonBody.businesses.length < 5) {
+			if (response.jsonBody.businesses.length < 10) {
 				length = response.jsonBody.businesses.length;
 			}
 
@@ -87,7 +89,7 @@ io.on('connection', function(socket) {
 					link: link
 				}
 
-				console.log(name);
+				console.log("in yelp: " + point.name);
 
 				data.push(point);
 			}

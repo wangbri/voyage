@@ -1,12 +1,6 @@
 import openSocket from 'socket.io-client';
 const socket = openSocket('http://localhost:8000');
 
-// var event = new Event('build');
-
-// locationsMarkers.addEventListener('build', function(e) {
-
-// });
-
 export function sendRoute(input) {
   socket.emit('route', input);
 }
@@ -46,8 +40,6 @@ export function displaySched(cb) {
 export function doneGenerating() {
   socket.emit('doneGenerating');
 }
-
-
 
 // draw the different directions  
 export function calculateAndDisplayRoute(addresses, directionsService, directionsDisplay) {
@@ -113,26 +105,9 @@ export function codeAddress(input, geocoder, map) {
           icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
         });
 
-      /******************************check here**********************/
-
-
-
         if (name == null) {
           name = results[0].formatted_address;
         }
-
-        // var infowindow = new window.google.maps.InfoWindow({
-        //   content: '<div class="card" style="width: 18rem;"><img class="card-img-top" src=' + image + 
-        //   '><div class="card-body"><h5 class="card-title">' + name + 
-        //   '</h5><p class="card-text">Some quick example text to build on the card title and make up the bulk of the card content.</p><a href=' + link + 
-        //   ' class="btn btn-primary">Yelp it</a>&nbsp;<button class="btn btn-danger" onclick="removeMarker(\'' + marker['position'] + 
-        //   '\')">Remove</button></div></div>',   
-        //   maxWidth: 230
-        // });
-
-        // marker.addListener('click', function() {
-        //   infowindow.open(map, marker);
-        // });
 
         var tempMarker = {
           marker: marker,
@@ -151,8 +126,6 @@ export function codeAddress(input, geocoder, map) {
         alert('Geocode was not successful for the following reason: ' + status);
         reject("Geocode was not successful");
       }
-
-      // markers.push(marker);
     });
   });
 }
