@@ -260,12 +260,12 @@ class Maps extends Component {
 
     console.log(schedType);
 
-    if(schedType == "smallest"){
-      calculateAndDisplayRoute(smallest, this.state.directionsService, this.state.directionsDisplay);
+    if(schedType == "third smallest"){
+      calculateAndDisplayRoute(third, this.state.directionsService, this.state.directionsDisplay);
     } else if (schedType  == "second smallest"){
       calculateAndDisplayRoute(second, this.state.directionsService, this.state.directionsDisplay);
     } else{
-      calculateAndDisplayRoute(third, this.state.directionsService, this.state.directionsDisplay);
+      calculateAndDisplayRoute(smallest, this.state.directionsService, this.state.directionsDisplay);
     }
 
     // clear map markers
