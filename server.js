@@ -158,6 +158,12 @@ io.on('connection', function(socket) {
 
 		var schedules = []; //the different list 
 
+		console.log("start end time");
+    	console.log(startTime);
+	    console.log(endTime);
+
+
+
 		for(var a = 0; a < data.length; a++){
 			for(var b = 0; b < data.length; b++){
 				if(a !== b){
@@ -175,82 +181,168 @@ io.on('connection', function(socket) {
 
 			        currentSched.addPlace(addresses);
 			        schedules.push(currentSched);
+			        //console.log(currentSched);
 		    	}
 				
 			}
 		}
 
-		// var min = 500000; //schedules[0].calculateTime();
-		// var minIndex = 0;
-		// for(var i = 1; i < schedules.length; i++){
-  //      		//schedules[i].calculateTime()
-  //       	var curTime = schedules[i].calculateTime();
-  //       	//console.log(curTime);
-  //       	if(curTime < min){
-  //       		min = curTime;
-  //       		minIndex = i;
-  //       	}
-  //   	}
+
+		console.log(schedules.length);
 
     	let promises = schedules.map((schedule, index) => {
     		var time = schedule.calculateTime(transit);
-    		//console.log(time);
+    		console.log(time);
 
     		return time;
     	});
 
     	Promise.all(promises)
     	.then(results => {
-    		var min = results[0];
-    		var minIndex = 0;
 
-    		if(results.length >= 3){
-	    		var secondMin = results[1];
-	    		var thirdMin = results[2];
-	    		var secondMinIndex = 1;
-	    		var thirdMinIndex = 2;
-	    		//console.log(results);
-	    		//results.sort();
+    		var starting = parseInt(startTime, 10);
+	    	var ending = parseInt(endTime, 10);
 
-	    		for (var i = 0; i < results.length; i++) {
-	    			var time = results[i];
-	    			console.log(time);
-
-	    			if (time < min) {
-	    				thirdMin = secondMin;
-	    				thirdMinIndex = secondMinIndex;
-	    				secondMin = min;
-	    				secondMinIndex = minIndex;
-	    				min = time;
-	    				minIndex = i;
-	    			 } else if(time < secondMin){
-	    				thirdMin = secondMin;
-	    				thirdMinIndex = secondMinIndex;
-	    				secondMin = time;
-	    				secondMinIndex = i;
-	    			} else if(time < thirdMin){
-	    				thirdMin = time;
-	    				thirdMinIndex = i;
-	    			}
-	    		}
-	    	}
+    		Array.prototype.contains = function(obj) {
+    			var i = this.length;
+			    while (i--) {
+			        if (this[i] === obj) {
+			            return true;
+			        }
+			    }
+			    return false;
+			}
 
 
+    		var min;
+    		var minIndex;
+    		var startIndex;
+    		var secondMin;
+		    var thirdMin;
+		    var secondMinIndex;
+		    var thirdMinIndex;
+    		var filteredIndex = [];
 
-    		//TODO: Order the schedules
     		var smallest = {
-    			smallestScheduleList: schedules[minIndex].getSpecificSchedule(),
-    			smallestTime: min,
-    			secondScheduleList: schedules[secondMinIndex].getSpecificSchedule(),
-    			secondTime: secondMin,
-    			thirdScheduleList: schedules[thirdMinIndex].getSpecificSchedule(),
-    			thirdTime: thirdMin
+    			smallestScheduleList: null,
+    			smallestTime: null,
+    			secondScheduleList: null,
+    			secondTime: null,
+    			thirdScheduleList: null,
+    			thirdTime: null,
+    			valid: true
     		}
 
-    		console.log("emitting schedule");
-    		console.log(smallest.smallestScheduleList);
-    		console.log(smallest.secondScheduleList);
-    		console.log(smallest.thirdScheduleList);
+
+
+    		var filtered = results.filter(function(value, index, arr){
+    			// console.log(value);
+    			// console.log(index);
+    			// console.log(((value/3600)+1) + starting);
+    			// console.log(ending);
+    			var needFilter = (((value/3600)+1) + starting) > ending;
+    			if(needFilter){
+    				filteredIndex.push(index);
+    			}
+    			 
+    			return needFilter;
+			});
+
+			// console.log("Filtered");
+			// console.log(filtered);
+			// console.log(filteredIndex);
+
+
+			if(results.length != filtered.length){		
+
+				for(var j = 0; j < results.length; j++){
+	    			if(!filteredIndex.contains(j)){
+		    			min = results[j];
+		    			minIndex = j;
+		    			startIndex = j+1;
+		    			break;
+		    		}
+	    		}
+
+	    		min = results[0];
+	    		minIndex = 0;
+
+	    		if(results.length >= 3){
+		    		secondMin = min;
+		    		thirdMin = min;
+		    		secondMinIndex = minIndex;
+		    		thirdMinIndex = minIndex;
+		    		//console.log(results);
+		    		//results.sort();
+
+		    		for (var i = startIndex; i < results.length; i++) {
+		    			var time = results[i];
+		    			console.log(time);
+
+		    			// if(((time/3600)+1) + starting > ending ){
+		    			// 	console.log("Need filtering");
+		    			// 	continue;
+		    			// }
+		    			
+		    			if(filteredIndex.contains(j)){
+		    				continue;
+		    			}
+
+		    			if (time < min) {
+		    				thirdMin = secondMin;
+		    				thirdMinIndex = secondMinIndex;
+		    				secondMin = min;
+		    				secondMinIndex = minIndex;
+		    				min = time;
+		    				minIndex = i;
+		    			 } else if(time < secondMin){
+		    				thirdMin = secondMin;
+		    				thirdMinIndex = secondMinIndex;
+		    				secondMin = time;
+		    				secondMinIndex = i;
+		    			} else if(time < thirdMin){
+		    				thirdMin = time;
+		    				thirdMinIndex = i;
+		    			}
+		    		}
+		    	}
+
+		    	smallest.smallestScheduleList = schedules[minIndex].getSpecificSchedule();
+    			smallest.smallestTime = min;
+    			smallest.secondScheduleList = schedules[secondMinIndex].getSpecificSchedule();
+    			smallest.secondTime = secondMin;
+    			smallest.thirdScheduleList = schedules[thirdMinIndex].getSpecificSchedule();
+    			smallest.thirdTime = thirdMin;
+		    } else {
+		    	smallest.valid = false;
+
+		    }
+
+		    //console.log(smallest.valid);
+
+
+
+    		// //TODO: Order the schedules
+    		// var smallest = {
+    		// 	smallestScheduleList: schedules[minIndex].getSpecificSchedule(),
+    		// 	smallestTime: min,
+    		// 	secondScheduleList: schedules[secondMinIndex].getSpecificSchedule(),
+    		// 	secondTime: secondMin,
+    		// 	thirdScheduleList: schedules[thirdMinIndex].getSpecificSchedule(),
+    		// 	thirdTime: thirdMin,
+    		// 	valid: valid
+    		// }
+
+
+
+
+    		// console.log("emitting schedule");
+    		// console.log(smallest.smallestScheduleList);
+    		// console.log(smallest.smallestTime);
+    		// console.log(smallest.secondScheduleList);
+    		// console.log(smallest.secondTime);
+    		// console.log(smallest.thirdScheduleList);
+    		// console.log(smallest.thirdTime);
 
     		fastSchedules = smallest;
 

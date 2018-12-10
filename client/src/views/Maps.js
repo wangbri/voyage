@@ -203,10 +203,15 @@ class Maps extends Component {
     var secondSmallest = [];
     var thirdSmallest = [];
 
-    for(var i = 0; i < input.smallestScheduleList.length; i++){
-      smallest.push(input.smallestScheduleList[i].input.location);
-      secondSmallest.push(input.secondScheduleList[i].input.location);
-      thirdSmallest.push(input.thirdScheduleList[i].input.location);
+    if(input.valid){
+      for(var i = 0; i < input.smallestScheduleList.length; i++){
+        smallest.push(input.smallestScheduleList[i].input.location);
+        secondSmallest.push(input.secondScheduleList[i].input.location);
+        thirdSmallest.push(input.thirdScheduleList[i].input.location);
+      }
+    } else{
+      alert("No possible schedule");
+      window.location.href ="./input";
     }
 
 
@@ -221,8 +226,10 @@ class Maps extends Component {
       thirdPlaces: thirdSmallest
     });
 
-    doneGenerating();
-    calculateAndDisplayRoute(this.state.smallestPlaces, this.state.directionsService, this.state.directionsDisplay);
+    if(input.valid){
+      doneGenerating();
+      calculateAndDisplayRoute(this.state.smallestPlaces, this.state.directionsService, this.state.directionsDisplay);
+    }
 
     //places = [this.state.smallestPlaces, this.state.secondPlaces, this.state.thirdPlaces];
   }

@@ -35,10 +35,12 @@ class Form extends Component {
 
   displaySchedType(data){
     document.getElementById("inputState").style.display = "block";
+    document.getElementById("display-schedule-btn").style.display = "block";
   }
 
   componentDidMount() {
     document.getElementById("inputState").style.display = "none";
+    document.getElementById("display-schedule-btn").style.display = "none";
   }
 
   handleYelpSubmit(event) {
@@ -98,7 +100,7 @@ class Form extends Component {
         <div className="btn-group">
           <button type="button" className="btn btn-primary" id="yelp-btn" onClick={this.handleYelpSubmit}>Submit Yelp Address</button>
           <button type="button" className="btn btn-primary" id="generate-schedule-btn" onClick={this.handleGenerateScheduleSubmit}>Generate Schedule</button>
-          <a href="./results" type="button" className="btn btn-primary">Display Schedules</a>
+          <a href="./results" type="button" id="display-schedule-btn" className="btn btn-primary">Display Schedules</a>
 
         </div>
         <div class="col">

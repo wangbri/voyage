@@ -41,6 +41,10 @@ var Schedule = (function (){
 			var waypts = [];
 			var sum = 0;
 
+			console.log("calculate Time " + this.start.location + " " + this.end.location);
+			// console.log(this.start.location);
+			// console.log(this.end.location);
+
 			  // use waypoints for intermediate destinations
 			  for (var i = 0; i < this.placesInput.length; i++) {
 			    waypts.push({
@@ -71,39 +75,7 @@ var Schedule = (function (){
 				    // alert('Directions request failed due to the following reason: ' + status);
 				    console.log("Problem with directions server " + err);
 				});
-			  //})
-
-			  /*var directionsParams = {
-			    origin: this.start,
-			    destination: this.end,
-			    travelMode: 'DRIVING'
-			  }
-
-			  if (waypts.length > 0) {
-			    directionsParams['waypoints'] = waypts;
-			    directionsParams['optimizeWaypoints'] = true;
-			  }
-
-			  	//return new Promise((resolve, reject) => {
-					directionsService.route(directionsParams, function(response, status) {
-					    if (status === 'OK') {
-					    	var route = response.routes[0];
-					    	var sum = 0;
-					    	for (var i = 0; i < route.legs.length; i++) {
-					    		sum += route.legs[i].duration.value;
-					    	}
-					    	
-					    	this.time = sum;
-						  	resolve(this.time);
-					    } else {
-					      alert('Directions request failed due to the following reason: ' + status);
-					    }
-				  	});
-				//});*/
-
-				// return sum;
-
-			  //console.log(this.time);
+			  
 		},
 
 		getTotalTime: function(){
@@ -154,7 +126,7 @@ var Schedule = (function (){
 			}
 
 			places.push(placesMarker2);
-			console.log(places);
+			//console.log(places);
 			
 			return places;
 		}
