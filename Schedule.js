@@ -65,6 +65,7 @@ var Schedule = (function (){
 		    	.then((response) => {
 				    var route = response.json.routes[0];
 				    for (var i = 0; i < route.legs.length; i++) {
+				    	console.log(route.legs[i].duration.value);
 				    	sum += route.legs[i].duration.value;
 				    }
 				    //console.log(sum);
