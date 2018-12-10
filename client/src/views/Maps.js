@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { receiveAdd, receiveRemove, codeAddress, calculateAndDisplayRoute, receiveSchedule } from '../api/googleMaps.js';
+import { receiveAdd, receiveRemove, codeAddress, calculateAndDisplayRoute, receiveSmallest, getSmallest, receiveSchedule } from '../api/googleMaps.js';
 import Forms from '../components/Forms';
 import ScrollMarkers from '../components/Marker';
 
@@ -27,12 +27,14 @@ class Maps extends Component {
     this.addMarker = this.addMarker.bind(this);
     this.receiveRoute = this.receiveRoute.bind(this);
     this.handleScheduleChange = this.handleScheduleChange.bind(this);
+    this.receiveRoute = this.receiveRoute.bind(this);
 
     // receiveSchedule((err, data) => this.printSchedule(data));
 
     receiveRemove((err, data) => this.removeMarker(data));
     receiveAdd((err, data) => this.addMarker(data));
-    receiveSchedule((err, data) => this.receiveRoute(data))
+    receiveSchedule((err, data) => this.getSchedule(data));
+    receiveSmallest((err, data) => this.receiveRoute(data));
   }
 
   componentDidMount() {
@@ -193,14 +195,39 @@ class Maps extends Component {
   }
 
   receiveRoute(input) {
-    console.log("In displayRoute");
+    console.log("In receiveRoute");
+    console.log(input);
+    //console.log(input[0]);
+
+    var smallest = [];
+    var secondSmallest = [];
+    var thirdSmallest = [];
+
+    for(var i = 0; i < input.smallestScheduleList.length; i++){
+      smallest.push(input.smallestScheduleList[i].input.location);
+      secondSmallest.push(input.secondScheduleList[i].input.location);
+      thirdSmallest.push(input.thirdScheduleList[i].input.location);
+    }
 
 
-    this.setState({smallestPlaces : ['2247 Guadalupe St', '3825 Lake Austin Blvd, Austin, Texas 78703', 'East 41st Street, Austin, TX'],
-                secondPlaces: ['3825 Lake Austin Blvd, Austin, Texas 78703', '2247 Guadalupe St', 'East 41st Street, Austin, TX'],
-                thirdPlaces: ['2247 Guadalupe St', 'East 41st Street, Austin, TX', '3825 Lake Austin Blvd, Austin, Texas 78703']});
+
+    // this.setState({smallestPlaces : ['2247 Guadalupe St', '3825 Lake Austin Blvd, Austin, Texas 78703', 'East 41st Street, Austin, TX'],
+    //             secondPlaces: ['3825 Lake Austin Blvd, Austin, Texas 78703', '2247 Guadalupe St', 'East 41st Street, Austin, TX'],
+    //             thirdPlaces: ['2247 Guadalupe St', 'East 41st Street, Austin, TX', '3825 Lake Austin Blvd, Austin, Texas 78703']});
+
+    this.setState({
+      smallestPlaces: smallest,
+      secondPlaces: secondSmallest,
+      thirdPlaces: thirdSmallest
+    });
 
     //places = [this.state.smallestPlaces, this.state.secondPlaces, this.state.thirdPlaces];
+  }
+
+  getSchedule(input){
+    console.log("In getSchedule");
+    console.log(input);
+    getSmallest("");
   }
 
   displayRoute(schedType) {
