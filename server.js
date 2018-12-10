@@ -11,6 +11,7 @@ const app = express()
   //   res.send({ express: 'Hello From Express' });
   // });
 
+// app.use('/static', express.static(path.join(__dirname, 'client/public')));
 const port = process.env.PORT || 5000;
 
 // app.listen(port, () => console.log(`Listening on port ${port}`));
@@ -29,6 +30,9 @@ var startTime;
 var endTime;
 var transit;
 var fastSchedules;
+
+// all schedules
+var savedSchedules = [];
 
 io.on('connection', function(socket) {
 	socket.on('yelp', function(data) {
@@ -112,6 +116,26 @@ io.on('connection', function(socket) {
 
 	socket.on('smallest', function(data) {
 		io.emit('smallest', fastSchedules);
+	})
+
+	socket.on('saveSchedule', function(data) {
+		// console.log("generated room at /" + data);
+
+		// app.get('/room/' + data, function(req , res){
+		//   res.render('room: ' + data);
+		// });
+		console.log("saved schedule " + data);
+
+		var code = "foobar";
+
+		savedSchedules[code] = data;
+	})
+
+	socket.on('getSchedule', function(data) {
+		console.log("emitting saved schedule " + savedSchedules[data]);
+		console.log(savedSchedules);
+
+		io.emit('getSchedule', savedSchedules[data]);
 	})
 
 	socket.on('schedule', function(data){

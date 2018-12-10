@@ -62,7 +62,8 @@ class Form extends Component {
     for (var i = 0; i < this.props.markers.length; i++) {
       names.push({
         name: this.props.markers[i].input.name,
-        location: this.props.markers[i].input.location
+        location: this.props.markers[i].input.location,
+        image: this.props.markers[i].input.image
       });
     }
 
