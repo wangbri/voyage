@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import ScrollMarkers from '../components/Marker';
 import { getSmallest, receiveSmallest } from '../api/googleMaps.js';
-import { saveSchedule, getSchedule, receiveSchedule } from '../api/roomCodes.js';
+import { saveSchedule, getSchedule, receiveSchedule, getCode } from '../api/roomCodes.js';
 
 class Results extends Component {
   constructor(props) {
@@ -19,6 +19,7 @@ class Results extends Component {
 
     receiveSmallest((err, data) => this.printSchedule(data));
     receiveSchedule((err, data) => this.populateSchedule(data));
+    getCode((err, data) => this.populateCode(data));
   }
 
   componentDidMount() {
@@ -71,6 +72,12 @@ class Results extends Component {
 
     this.setState({
       markers: data
+    })
+  }
+
+  populateCode(data) {
+    this.setState({
+      code: data
     })
   }
 

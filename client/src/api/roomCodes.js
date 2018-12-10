@@ -5,6 +5,10 @@ export function saveSchedule(input) {
   socket.emit('saveSchedule', input);
 }
 
+export function getCode(cb) {
+	socket.on('code', data => cb(null, data));
+}
+
 export function getSchedule(input) {
   socket.emit('getSchedule', input);
 }

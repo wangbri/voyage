@@ -126,9 +126,14 @@ io.on('connection', function(socket) {
 		// });
 		console.log("saved schedule " + data);
 
-		var code = "foobar";
+		var code = ""; //foobar
+		var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+		for (var i = 0; i < 5; i++)
+		  code += possible.charAt(Math.floor(Math.random() * possible.length));
 
 		savedSchedules[code] = data;
+		io.emit('code', code);
 	})
 
 	socket.on('getSchedule', function(data) {
