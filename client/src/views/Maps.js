@@ -98,7 +98,20 @@ class Maps extends Component {
 
   displayMarkers(input) {
     console.log(input.length);
-    input = input[0].concat(input[1]);
+
+    if (input[1] != undefined) {
+      input = input[0].concat(input[1]);
+    } else {
+      input = input[0];
+    }
+
+    for (var i = 0; i < input.length; i++) {
+      console.log("input at display: " + input[i].name);
+    }
+
+    input = input.filter(function(item, index, inputArray) {
+      return inputArray.indexOf(item) == index;
+    });
 
     let promises = input.map((data, index) => {
       var tempMarker = codeAddress(data, this.state.geocoder, this.state.map);
