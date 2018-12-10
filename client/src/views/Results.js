@@ -101,16 +101,25 @@ class Results extends Component {
   }
 
   renderCodeField() {
-    
+    return (
+      <div className="input-group mb-3">
+        <button type="button" className="btn btn-primary" onClick={this.generateCode}>Share this schedule!</button>
+        <input type="text" className="form-control" placeholder="Specify a schedule code..." value={this.state.code} onChange={this.handleCodeChange}></input>
+        <div className="input-group-append">
+          <button type="button" className="btn btn-primary" onClick={this.getSchedule}>Get schedule!</button>
+        </div>
+      </div>
+    );
   }
 
   render() {
     let markers;
+    let button = this.renderCodeField();
 
     if (this.state.markers == undefined || this.state.markers.length == 0) {
       markers = this.render404Page();
     } else {
-      markers = <div><button type="button" className="btn btn-primary" onClick={this.generateCode}>Share this schedule!</button><input type="text" value={this.state.code}></input>{this.state.markers.map(marker => { return this.renderSchedule(marker); })}</div>
+      markers = <div>{button}{this.state.markers.map(marker => { return this.renderSchedule(marker); })}</div>
     }
 
     return (
