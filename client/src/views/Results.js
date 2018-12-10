@@ -81,27 +81,37 @@ class Results extends Component {
     })
   }
 
+  render404Page() {
+    return (
+      <div id="notfound">
+        <div className="notfound">
+          <div className="notfound-404">
+            <h1>404</h1>
+          </div>
+          <h2>Oops, the schedule you are looking for cannot be found!</h2>
+          <div className="input-group mb-3">
+            <input type="text" className="form-control" placeholder="Specify a schedule code..." value={this.state.code} onChange={this.handleCodeChange}></input>
+            <div className="input-group-append">
+              <button type="button" className="btn btn-primary" onClick={this.getSchedule}>Get schedule!</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   render() {
+    let markers;
+
+    if (this.state.markers == undefined || this.state.markers.length == 0) {
+      markers = this.render404Page();
+    } else {
+      markers = <div><button type="button" className="btn btn-primary" onClick={this.generateCode}>Share this schedule!</button>{this.state.markers.map(marker => { return this.renderSchedule(marker); })}</div>
+    }
+
     return (
       <div>
-        <div className="row">
-          <div className="col">
-            <button type="button" className="btn btn-primary" onClick={this.generateCode}>Share this schedule!</button>
-          </div>
-          <div className="col">
-            <input type="text" className="form-control" placeholder="Specify a schedule code..." value={this.state.code} onChange={this.handleCodeChange}></input>
-          </div>
-          <div className="col">
-            <button type="button" className="btn btn-primary" onClick={this.getSchedule}>Get schedule!</button>
-          </div>
-        </div>
-        <div>
-        { 
-          this.state.markers.map(marker => {
-            return this.renderSchedule(marker);
-          })
-        }
-        </div>
+        {markers}
       </div>
     );
   }

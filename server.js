@@ -38,6 +38,48 @@ var fastSchedules;
 // all schedules
 var savedSchedules = [];
 
+function yelpQuery(data, price) {
+	return client.search({
+		term: data,
+		location: location,
+		price: price
+	}).then(response => {
+		var data = [];
+		var length = 5;
+
+		if (response.jsonBody.businesses.length < 10) {
+			length = response.jsonBody.businesses.length;
+		}
+
+		for (var i = 0; i < length; i++) {
+			var business = response.jsonBody.businesses[i];
+
+			var businessLocation = business.location;
+
+			var name = business.name;	
+			var location = businessLocation.address1 + ", " + businessLocation.city + ", " + businessLocation.state;
+			var image = business.image_url;
+			var link = business.url;
+
+			var point = {
+				name: name,
+				location: location,
+				image: image,
+				link: link
+			}
+
+			console.log("in yelp: " + point.name);
+
+			data.push(point);
+		}
+
+		// io.emit('yelp' + type, data);
+		return data;
+	}).catch(e => {
+	  console.log(e);
+	});
+}
+
 io.on('connection', function(socket) {
 	socket.on('yelp', function(data) {
 		console.log(data);
@@ -46,6 +88,7 @@ io.on('connection', function(socket) {
 		// var sessionLocation = sessionStorage.getItem("location");
 
 		var priceString = "";
+		var prices = [];
 
 		if (location == "" || location == undefined) {
 			location = "austin, tx";
@@ -55,48 +98,34 @@ io.on('connection', function(socket) {
 			console.log("price " + price);
 			var maxPrice = price.match(/\$/g).length;
 
-			for (var i = 1; i < maxPrice; i++) {
-				priceString += "," + i;
+			for (var i = 1; i <= maxPrice; i++) {
+				priceString += i + ",";
 			}
+
+			priceString = priceString.slice(0, -1);
+
+			console.log("price " + priceString);
+
+			// yelpQuery(data, priceString);
+			prices.push(priceString);
 		}
 
-		client.search({
-			term: data,
-			location: location,
-			price: priceString
-		}).then(response => {
-			var data = [];
-			var length = 5;
+		prices.push("");
 
-			if (response.jsonBody.businesses.length < 10) {
-				length = response.jsonBody.businesses.length;
-			}
+		var totalQueries = [];
+		
+		let promises = prices.map((price, index) => {
+  		var queries = yelpQuery(data, price);
+  		return queries;
+  	});
 
-			for (var i = 0; i < length; i++) {
-				var business = response.jsonBody.businesses[i];
-
-				var businessLocation = business.location;
-
-				var name = business.name;	
-				var location = businessLocation.address1 + ", " + businessLocation.city + ", " + businessLocation.state;
-				var image = business.image_url;
-				var link = business.url;
-
-				var point = {
-					name: name,
-					location: location,
-					image: image,
-					link: link
-				}
-
-				console.log("in yelp: " + point.name);
-
-				data.push(point);
-			}
-
-			io.emit('yelp', data);
-		}).catch(e => {
-		  console.log(e);
+  	Promise.all(promises)
+  	.then(results => {
+  		for (var i = 0; i < results.length; i++) {
+  			totalQueries.push(results[i]);
+  		}
+  		console.log("here " + totalQueries);
+  		io.emit("yelp", totalQueries);
 		});
 	})
 

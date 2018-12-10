@@ -69,14 +69,11 @@ class UserInput extends Component {
             <div className="row">
               <div className="col-md-10 col-lg-8 col-xl-7 mx-auto">
                 <div className="input-form">
-                  <form className="needs-validation" novalidate>
+                  <form className="needs-validation" action="./map" novalidate>
                     <div className="form-row">
                       <div className="col-md-3 mb-3">
                         <label for="validationCustom01">Where do you plan to travel?</label>
                         <input type="text" className="form-control" id="validationCustom01" placeholder="Specify a location..." value={this.state.location} onChange={this.handleLocationChange} required></input>
-                        <div className="valid-feedback">
-                          Looks good!
-                        </div>
                         <div className="invalid-feedback">
                           Please provide a city or location.
                         </div>
@@ -89,9 +86,6 @@ class UserInput extends Component {
                           <option>$$$</option>
                           <option>$$$$</option>
                         </select>
-                        <div className="valid-feedback">
-                          Looks good!
-                        </div>
                         <div className="invalid-feedback">
                           Please provide a price range.
                         </div>
@@ -126,7 +120,7 @@ class UserInput extends Component {
                     </div>
                     <div className="form-row">
                       <div className="col-md-1 mb-1">
-                        <a href="./map" className="btn btn-primary" type="submit" onClick={this.sendInputs}>Send Input</a>
+                        <button href="./map" className="btn btn-primary" type="submit" onClick={this.sendInputs}>Send Input</button>
                       </div>
                     </div>
                   </form>

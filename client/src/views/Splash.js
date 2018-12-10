@@ -11,12 +11,6 @@ class Splash extends Component {
   render() {
     return (
       <div>
-        <nav className="navbar navbar-light bg-light static-top">
-          <div className="container">
-            <a className="navbar-brand" href="#">A project for EE461L.</a>
-          </div>
-        </nav>
-
         <header className="masthead text-white text-center">
           <div className="overlay"></div>
           <div className="container">
@@ -29,7 +23,7 @@ class Splash extends Component {
               </div>
               <div className="col-md-10 col-lg-8 col-xl-7 mx-auto">
                 <div>
-                  <a type="submit" href="./input" className="btn btn-lg btn-primary">Start your adventure today!</a>
+                  <a href="./input" className="btn btn-lg btn-primary" role="button">Start your adventure today!</a>
                 </div>
               </div>
             </div>

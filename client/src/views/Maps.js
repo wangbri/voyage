@@ -21,7 +21,7 @@ class Maps extends Component {
     }
 
     this.displayMarkers = this.displayMarkers.bind(this);
-    // this.setMapOnAll = this.setMapOnAll.bind(this);
+    this.setMapOnAll = this.setMapOnAll.bind(this);
     this.displayRoute = this.displayRoute.bind(this);
     this.removeMarker = this.removeMarker.bind(this);
     this.addMarker = this.addMarker.bind(this);
@@ -71,13 +71,23 @@ class Maps extends Component {
     // });
   }
 
-  // setMapOnAll() {
-  //   var markers = this.state.markers;
+  setMapOnAll(value) {
+    var markers = this.state.markers;
+    var tempMarkers = this.state.tempMarkers;
 
-  //   for (var i = 0; i < markers.length; i++) {
-  //     markers[i].marker.setMap(this.state.map);
-  //   }
-  // }
+    for (var i = 0; i < markers.length; i++) {
+      markers[i].marker.setMap(value);
+    }
+
+    for (var i = 0; i < tempMarkers.length; i++) {
+      tempMarkers[i].marker.setMap(value);
+    }
+
+    this.setState({
+      markers: markers,
+      tempMarkers: tempMarkers
+    })
+  }
 
   createListener(marker, infoWindow) {
     // WHY does it have to be an arrow function to get scope??
@@ -88,10 +98,11 @@ class Maps extends Component {
 
   displayMarkers(input) {
     console.log(input.length);
+    input = input[0].concat(input[1]);
 
     let promises = input.map((data, index) => {
       var tempMarker = codeAddress(data, this.state.geocoder, this.state.map);
-      console.log("displayMarkers called: " + tempMarker);
+      console.log("displayMarkers called: " + data);
 
       return tempMarker;
     });
@@ -134,6 +145,8 @@ class Maps extends Component {
 
     // console.log(sessionStorage.getItem("myCat"));
     // this.ScrollMarkers.handleMarkerChange();
+
+    this.setMapOnAll(this.state.map);
   }
 
   addMarker(position) {
@@ -176,7 +189,6 @@ class Maps extends Component {
 
     console.log("length of markers after add: " + markers.length);
     this.setState({ markers: markers });
-    // this.setMapOnAll();
   }
 
   removeMarker(position) {
@@ -230,7 +242,7 @@ class Maps extends Component {
       calculateAndDisplayRoute(this.state.smallestPlaces, this.state.directionsService, this.state.directionsDisplay);
     }
 
-    //places = [this.state.smallestPlaces, this.state.secondPlaces, this.state.thirdPlaces];
+    this.setMapOnAll(null);
   }
 
   getSchedule(input){
@@ -256,7 +268,8 @@ class Maps extends Component {
       calculateAndDisplayRoute(third, this.state.directionsService, this.state.directionsDisplay);
     }
 
-    //calculateAndDisplayRoute(smallestScheduleList, this.state.directionsService, this.state.directionsDisplay);
+    // clear map markers
+    this.setMapOnAll(null);
   }
 
   handleScheduleChange(event){
