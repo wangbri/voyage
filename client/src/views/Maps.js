@@ -109,9 +109,13 @@ class Maps extends Component {
       console.log("input at display: " + input[i].name);
     }
 
+    console.log(input);
+
     input = input.filter(function(item, index, inputArray) {
       return inputArray.indexOf(item) == index;
     });
+
+    console.log("After filtering " + input); 
 
     let promises = input.map((data, index) => {
       var tempMarker = codeAddress(data, this.state.geocoder, this.state.map);
