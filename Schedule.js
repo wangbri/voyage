@@ -94,7 +94,11 @@ var Schedule = (function (){
 			placesMarker1.input = {
 				name: this.start.name,
 				location: this.start.location,
-				image: this.start.image //"https://placeholdit.imgix.net/~text?txtsize=16&txt=318%C3%97180&w=288&h=50"
+				image: this.start.image, //"https://placeholdit.imgix.net/~text?txtsize=16&txt=318%C3%97180&w=288&h=50"
+				category: this.start.category,
+				price: this.start.price,
+				rating: this.start.rating,
+				link: this.start.link
 			}
 
 			places.push(placesMarker1);
@@ -108,7 +112,11 @@ var Schedule = (function (){
 				placesMarker.input = {
 					name: this.placesInput[i].name,
 					location: this.placesInput[i].location,
-					image: this.placesInput[i].image //"https://placeholdit.imgix.net/~text?txtsize=16&txt=318%C3%97180&w=288&h=50"
+					image: this.placesInput[i].image, //"https://placeholdit.imgix.net/~text?txtsize=16&txt=318%C3%97180&w=288&h=50"
+					category: this.placesInput[i].category,
+					price: this.placesInput[i].price,
+					rating: this.placesInput[i].rating,
+					link: this.start.link
 				}
 
 				places.push(placesMarker)
@@ -122,7 +130,11 @@ var Schedule = (function (){
 			placesMarker2.input = {
 				name: this.end.name,
 				location: this.end.location,
-				image: this.end.image //"https://placeholdit.imgix.net/~text?txtsize=16&txt=318%C3%97180&w=288&h=50"
+				image: this.end.image, //"https://placeholdit.imgix.net/~text?txtsize=16&txt=318%C3%97180&w=288&h=50"
+				category: this.end.category,
+				price: this.end.price,
+				rating: this.end.rating,
+				link: this.start.link
 			}
 
 			places.push(placesMarker2);

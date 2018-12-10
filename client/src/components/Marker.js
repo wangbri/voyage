@@ -6,13 +6,18 @@ import HorizontalScroll from 'react-scroll-horizontal';
 // import { locationsMarkers } from '../api/googleMaps.js'
 
 function Marker(props) {
+	var location = props.input.location;
+	var category = "Type: " + props.input.category + ", Price: " + props.input.price + ", Rating: " + props.input.rating;
+	console.log("marker " + props.input.link);
+
 	return (
 		<div className="card" styles="width: 18rem;">
-	  	<img className="card-img-top" src={props.image}></img>
+	  	<img className="card-img-top" src={props.input.image}></img>
+	  	<div class="card-header">{category}</div>
 		  <div className="card-body">
-		    <h5 className="card-title">{props.title}</h5>
-		    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-		    <a href="#" className="btn btn-primary">Go somewhere</a>
+		    <h5 className="card-title">{props.input.name}</h5>
+		    <p className="card-text">{location}</p>
+		    <a href={props.input.link} className="btn btn-primary">Yelp it!</a>
 		  </div>
 		</div>
 	);
@@ -40,7 +45,7 @@ class ScrollMarkers extends Component {
 		const child = { width: `20em`, height: `50em`, marginLeft: `10px`, marginRight: childWidth, marginTop: `10px`}
 
 		return (
-			<div style={child}><Marker title={marker.input.name} image={marker.input.image} key={index}/></div>
+			<div style={child}><Marker input={marker.input} key={index}/></div>
 		);
 	}
 

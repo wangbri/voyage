@@ -81,12 +81,22 @@ export function codeAddress(input, geocoder, map) {
   var address;
   var image;
   var link;
+  var category;
+  var price;
+  var rating;
 
   if (input != null) {
     name = input['name'];
     address = input['location'];
     image = input['image'];
     link = input['link'];
+    category = input['category'];
+    price = input['price'];
+    rating = input['rating'];
+  }
+
+  if (price == undefined) {
+    price = "n/a"
   }
 
   return new Promise(function(resolve, reject) {
@@ -115,10 +125,13 @@ export function codeAddress(input, geocoder, map) {
         };
 
         tempMarker.input = {
-          name: input['name'],
-          image: input['image'],
-          link: input['link'],
-          location: input['location']
+          name: name,
+          image: image,
+          link: link,
+          location: address,
+          category: category,
+          price: price,
+          rating: rating
         }
 
         resolve(tempMarker);

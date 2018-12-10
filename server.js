@@ -60,15 +60,22 @@ function yelpQuery(data, price) {
 			var location = businessLocation.address1 + ", " + businessLocation.city + ", " + businessLocation.state;
 			var image = business.image_url;
 			var link = business.url;
+			var category = business.categories[0].title;
+			var price = business.price;
+			var rating = business.rating;
 
 			var point = {
 				name: name,
 				location: location,
 				image: image,
-				link: link
+				link: link,
+				category: category,
+				price: price,
+				rating: rating
 			}
 
 			console.log("in yelp: " + point.name);
+			console.log("in yelp: " + point.category);
 
 			data.push(point);
 		}
@@ -185,7 +192,7 @@ io.on('connection', function(socket) {
 	})
 
 	socket.on('schedule', function(data){
-		console.log("in schedule: " + data);
+		console.log("in schedule: " + data[0].price);
 
 		var schedules = []; //the different list 
 

@@ -136,11 +136,13 @@ class Maps extends Component {
         // console.log("in displayMarkers: " + tempMarker['input'].name);
         // console.log("in displayMarkers: " + tempMarker['input'].location);
 
+        var text = tempMarker['input'].location + "<br><b>Category: </b>" + tempMarker['input'].category + "<br><b>Price: </b>" + tempMarker['input'].price + ", <b>Rating: </b>" + tempMarker['input'].rating;
+
         var infoWindow = new window.google.maps.InfoWindow({
           content: '<div class="card" style="width: 18rem;"><img class="card-img-top" src=' + tempMarker['input'].image + 
           '><div class="card-body"><h5 class="card-title">' + tempMarker['input'].name + 
-          '</h5><p class="card-text">Some quick example text to build on the card title and make up the bulk of the card content.</p><button onclick="window.open(\'' + tempMarker['input'].link + 
-          '\')" class="btn btn-primary">Yelp it</button>&nbsp;<button class="btn btn-danger" onclick="removeMarker(\'' + tempMarker['marker'].position + '\')">Remove</button>&nbsp;<button class="btn btn-success" onclick="addMarker(\'' + tempMarker['marker'].position + '\')">Add</button></div></div>',   
+          '</h5><p class="card-text">' + text + '</p><button onclick="window.open(\'' + tempMarker['input'].link + 
+          '\')" class="btn btn-primary">Yelp it!</button>&nbsp;<button class="btn btn-danger" onclick="removeMarker(\'' + tempMarker['marker'].position + '\')">Remove</button>&nbsp;<button class="btn btn-success" onclick="addMarker(\'' + tempMarker['marker'].position + '\')">Add</button></div></div>',   
           maxWidth: 230
         });
 
@@ -184,14 +186,19 @@ class Maps extends Component {
           name: tempMarker.input.name,
           image: tempMarker.input.image,
           link: tempMarker.input.link,
-          location: tempMarker.input.location
+          location: tempMarker.input.location,
+          category: tempMarker.input.category,
+          price: tempMarker.input.price,
+          rating: tempMarker.input.rating
         }
+
+        var text = tempMarker['input'].location + "<br><b>Category: </b>" + tempMarker['input'].category + "<br><b>Price: </b>" + tempMarker['input'].price + " ,<b>Rating: </b>" + tempMarker['input'].rating;
 
         var infoWindow = new window.google.maps.InfoWindow({
           content: '<div class="card" style="width: 18rem;"><img class="card-img-top" src=' + tempMarker['input'].image + 
           '><div class="card-body"><h5 class="card-title">' + tempMarker['input'].name + 
-          '</h5><p class="card-text">Some quick example text to build on the card title and make up the bulk of the card content.</p><button onclick="window.open(\'' + tempMarker['input'].link + 
-          '\')" class="btn btn-primary">Yelp it</button>&nbsp;<button class="btn btn-danger" onclick="removeMarker(\'' + tempMarker['marker'].position + '\')">Remove</button>&nbsp;<button class="btn btn-success" onclick="addMarker(\'' + tempMarker['marker'].position + '\')">Add</button></div></div>',   
+          '</h5><p class="card-text">' + text + '</p><button onclick="window.open(\'' + tempMarker['input'].link + 
+          '\')" class="btn btn-primary">Yelp it!</button>&nbsp;<button class="btn btn-danger" onclick="removeMarker(\'' + tempMarker['marker'].position + '\')">Remove</button>&nbsp;<button class="btn btn-success" onclick="addMarker(\'' + tempMarker['marker'].position + '\')">Add</button></div></div>',   
           maxWidth: 230
         });
 

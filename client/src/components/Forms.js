@@ -73,7 +73,11 @@ class Form extends Component {
       names.push({
         name: this.props.markers[i].input.name,
         location: this.props.markers[i].input.location,
-        image: this.props.markers[i].input.image
+        image: this.props.markers[i].input.image,
+        category: this.props.markers[i].input.category,
+        price: this.props.markers[i].input.price,
+        rating: this.props.markers[i].input.rating,
+        link: this.props.markers[i].input.link
       });
     }
 
@@ -94,10 +98,12 @@ class Form extends Component {
   render() {
     return (
       <div className="row" id="submitAddress">
-        <input type="text" className="form-control" id="inputYelpAddress" placeholder="Specify a Yelp address.." value={this.state.value} onChange={this.handleYelpChange}></input>
-        <div className="btn-group">
-          <button type="button" className="btn btn-primary" id="yelp-btn" onClick={this.handleYelpSubmit}>Submit Yelp Address</button>
-          <button type="button" className="btn btn-primary" id="generate-schedule-btn" onClick={this.handleGenerateScheduleSubmit}>Generate Schedule</button>
+        <div class="input-group">
+          <input type="text" className="form-control" id="inputYelpAddress" placeholder="Specify a Yelp address.." value={this.state.value} onChange={this.handleYelpChange}></input>
+          <div className="input-group-append">
+            <button type="button" className="btn btn-primary" id="yelp-btn" onClick={this.handleYelpSubmit}>Submit Yelp Address</button>
+            <button type="button" className="btn btn-primary" id="generate-schedule-btn" onClick={this.handleGenerateScheduleSubmit}>Generate Schedule</button>
+          </div>
         </div>
         <div className="col">
             <select id="inputState" className="form-control" onChange={this.props.handleScheduleChange}>
