@@ -9,8 +9,8 @@ class UserInput extends Component {
       location: "austin, tx",
       price: "$",
       transit: "driving",
-      start: "",
-      end: ""
+      start: "1200",
+      end: "1230"
     }
 
     this.sendInputs = this.sendInputs.bind(this);
