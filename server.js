@@ -4,9 +4,9 @@ const path = require('path');
 const yelp = require('yelp-fusion');
 
 const app = express()
-  .use(express.static(path.join(__dirname, 'public')))
+  .use(express.static(path.join(__dirname, 'client/public')))
   .set('views', path.join(__dirname, 'views'))
-  // .get('/map', (req, res) => res.redirect('map.html'))
+  .get('/', (req, res) => res.redirect('aboutus.html'))
   // .get('/api/hello', (req, res) => {
   //   res.send({ express: 'Hello From Express' });
   // });
