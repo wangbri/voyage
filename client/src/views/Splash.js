@@ -23,7 +23,7 @@ class Splash extends Component {
           <div className="container">
             <div className="row">
               <div className="col-xl-9 mx-auto">
-                <h1 className="mb-5">Build a landing page for your business or project and generate more leads!</h1>
+                <h1 className="mb-5">Voyage! Your one-stop shop for travel plans.</h1>
               </div>
               <div className="col-md-10 col-lg-8 col-xl-7 mx-auto">
                 <form>
@@ -32,7 +32,7 @@ class Splash extends Component {
                       <input type="email" className="form-control form-control-lg" placeholder="Enter your email..."></input>
                     </div>
                     <div className="col-12 col-md-3">
-                      <button type="submit" className="btn btn-block btn-lg btn-primary">Sign up!</button>
+                      <a type="submit" href="./input" className="btn btn-block btn-lg btn-primary">Sign up!</a>
                     </div>
                   </div>
                 </form>
@@ -79,11 +79,13 @@ class Splash extends Component {
           <div className="container-fluid p-0">
             <div className="row no-gutters">
               <div className="col-lg-6 order-lg-2 text-white showcase-img" styles="background-image: url(img/bg-showcase-1.jpg);">
-                <img className="" src="img/bg-showcase-1.jpg" alt=""></img>
+                <img className="" src="img/travel-1.jpg" alt=""></img>
               </div>
               <div className="col-lg-6 order-lg-1 my-auto showcase-text">
-                <h2>Fully Responsive Design</h2>
-                <p className="lead mb-0">When you use a theme created by Start Bootstrap, you know that the theme will look great on any device, whether it's a phone, tablet, or desktop the page will behave responsively!</p>
+                <h2>What is Voyage?</h2>
+                <p className="lead mb-0">Voyage is a web application that optimizes schedules for your traveling needs!
+            All you have to do is select the places you want to visit, 
+            and our algorithm will generate efficient paths connecting your points of interest.</p>
               </div>
             </div>
             <div className="row no-gutters">
@@ -153,12 +155,6 @@ class Splash extends Component {
               <div className="col-md-10 col-lg-8 col-xl-7 mx-auto">
                 <form>
                   <div className="form-row">
-                    <div className="col-12 col-md-9 mb-2 mb-md-0">
-                      <input type="email" className="form-control form-control-lg" placeholder="Enter your email..."></input>
-                    </div>
-                    <div className="col-12 col-md-3">
-                      <button type="submit" className="btn btn-block btn-lg btn-primary">Sign up!</button>
-                    </div>
                   </div>
                 </form>
               </div>

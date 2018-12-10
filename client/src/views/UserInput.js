@@ -63,33 +63,35 @@ class UserInput extends Component {
   render() {
     return (
       <form>
-        <div className="row">
-          <div className="col">
-            <input type="text" className="form-control" placeholder="Specify a location..." value={this.state.location} onChange={this.handleLocationChange}></input>
-          </div>
-          <div class="col">
-            <select id="inputState" className="form-control" onChange={this.handlePriceChange}>
-              <option selected>$</option>
-              <option>$$</option>
-              <option>$$$</option>
-              <option>$$$$</option>
-            </select>
-          </div>
-          <div class="col">
-            <select id="inputState" className="form-control" onChange={this.handleTransitChange}>
-              <option selected>driving</option>
-              <option>bicycling</option>
-              <option>walking</option>
-            </select>
-          </div>
-          <div className="col">
-            <input type="text" className="form-control" placeholder="Specify a starting time..." value={this.state.start} onChange={this.handleStartChange}></input>
-          </div>
-          <div className="col">
-            <input type="text" className="form-control" placeholder="Specify an ending time..." value={this.state.end} onChange={this.handleEndChange}></input>
-          </div>
-          <div className="col">
-            <button type="button" className="btn btn-primary" onClick={this.sendInputs}>Send Input</button>
+        <div>
+          <div className="row">
+            <div className="col">
+              <input type="text" className="form-control" placeholder="Specify a location..." value={this.state.location} onChange={this.handleLocationChange}></input>
+            </div>
+            <div class="col">
+              <select id="inputState" className="form-control" onChange={this.handlePriceChange}>
+                <option selected>$</option>
+                <option>$$</option>
+                <option>$$$</option>
+                <option>$$$$</option>
+              </select>
+            </div>
+            <div class="col">
+              <select id="inputState" className="form-control" onChange={this.handleTransitChange}>
+                <option selected>driving</option>
+                <option>bicycling</option>
+                <option>walking</option>
+              </select>
+            </div>
+            <div className="col">
+              <input type="text" className="form-control" placeholder="Specify a starting time..." value={this.state.start} onChange={this.handleStartChange}></input>
+            </div>
+            <div className="col">
+              <input type="text" className="form-control" placeholder="Specify an ending time..." value={this.state.end} onChange={this.handleEndChange}></input>
+            </div>
+            <div className="col">
+              <button type="button" className="btn btn-primary" onClick={this.sendInputs}>Send Input</button>
+            </div>
           </div>
         </div>
       </form>
